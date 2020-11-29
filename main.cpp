@@ -20,7 +20,7 @@ void lower_char(char *str) {
   int i = 0;
 
   while (str[i] != '\0') {
-    if (str[i] >= 65 && str[i] <= 90) {
+    if (str[i] >= 'A' && str[i] <= 'Z') {
       str[i] += 32;
     }
 
@@ -42,7 +42,8 @@ void encrypt_reverse() {
 
   char msg[1000];
   cout << "\nType the message to encrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
 
   reverse_char(msg);
 
@@ -52,7 +53,8 @@ void encrypt_reverse() {
 void decrypt_reverse() {
   char msg[1000];
   cout << "\nType the message to decrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
 
   reverse_char(msg);
 
@@ -61,27 +63,32 @@ void decrypt_reverse() {
 
 void encrypt_cesar() {
 
-  char msg[1000];
+  char msg[1000], ch;
   cout << "\nType the message to encrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
 
-  int aux = 0, unknown_chars_count = 0;
+  int key = 3, aux = 0, unknown_chars_count = 0;
 
-  for (int i = 0; i < strlen(msg); i++) {
-    for (int j = 0; j < strlen(alfabet_m); j++) {
-      // if (msg[i] >= 65 && msg[i] <= 90) {
-      if (msg[i] == alfabet_m[j]) {
-        int aux = (j + 3) % 26;
-        msg[i] = alfabet_m[aux];
+  for (int i = 0; i < strlen(msg); ++i) {
+    ch = msg[i];
+
+    if (ch >= 'a' && ch <= 'z') {
+      ch = ch + key;
+
+      if (ch > 'z') {
+        ch = ch - 'z' + 'a' - 1;
       }
-      // } else if (msg[i] >= 97 && msg[i] <= 122) {
-      else if (msg[i] == alfabet_M[j]) {
-        int aux = (j + 3) % 26;
-        msg[i] = alfabet_M[aux];
+
+      msg[i] = ch;
+    } else if (ch >= 'A' && ch <= 'Z') {
+      ch = ch + key;
+
+      if (ch > 'Z') {
+        ch = ch - 'Z' + 'A' - 1;
       }
-      // } else {
-      // unknown_chars_count++;
-      // }
+
+      msg[i] = ch;
     }
   }
 
@@ -93,35 +100,32 @@ void encrypt_cesar() {
 }
 
 void decrypt_cesar() {
-  char msg[1000];
+  char msg[1000], ch;
   cout << "\nType the message to decrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
 
-  int aux, unknown_chars_count = 0;
+  int key = 3, aux = 0, unknown_chars_count = 0;
 
-  for (int i = 0; i < strlen(msg); i++) {
-    for (int j = 0; j < strlen(alfabet_m); j++) {
-      if (msg[i] >= 65 && msg[i] <= 90) {
-        if (msg[i] == alfabet_m[j]) {
-          if ((j - 3) < 0) {
-            aux = (j - 3) + 26;
-          } else {
-            aux = (j - 3) % 26;
-          }
-          msg[i] = alfabet_m[aux];
-        }
-      } else if (msg[i] >= 97 && msg[i] <= 122) {
-        if (msg[i] == alfabet_M[j]) {
-          if ((j - 3) < 0) {
-            aux = (j - 3) + 26;
-          } else {
-            aux = (j - 3) % 26;
-          }
-          msg[i] = alfabet_M[aux];
-        }
-      } else {
-        unknown_chars_count++;
+  for (int i = 0; i < strlen(msg); ++i) {
+    ch = msg[i];
+
+    if (ch >= 'a' && ch <= 'z') {
+      ch = ch - key;
+
+      if (ch > 'z') {
+        ch = ch - 'z' + 'a' - 1;
       }
+
+      msg[i] = ch;
+    } else if (ch >= 'A' && ch <= 'Z') {
+      ch = ch - key;
+
+      if (ch > 'Z') {
+        ch = ch - 'Z' + 'A' - 1;
+      }
+
+      msg[i] = ch;
     }
   }
 
@@ -135,7 +139,8 @@ void decrypt_cesar() {
 void encrypt_ROT13() {
   char msg[1000];
   cout << "\nType the message to encrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
 
   int aux, unknown_chars_count = 0;
 
@@ -169,7 +174,8 @@ void encrypt_ROT13() {
 void decrypt_ROT13() {
   char msg[1000];
   cout << "\nType the message to decrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
 
   int aux, unknown_chars_count = 0;
 
@@ -210,7 +216,8 @@ void encrypt_ROT_X() {
   char msg[1000];
   int key = 0;
   cout << "\nType the message to encrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
   cout << "\nEnter the numeric key: ";
   cin >> key;
 
@@ -247,7 +254,8 @@ void decrypt_ROT_X() {
   char msg[1000];
   int key = 0;
   cout << "\nType the message to decrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
   cout << "\nEnter the numeric key: ";
   cin >> key;
 
@@ -292,9 +300,11 @@ void encrypt_vigenere() {
   char msg[1000];
   char key[1000];
   cout << "\nType the message to encrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
   cout << "\nEnter the alfabetic key: ";
-  cin >> key;
+  cin.ignore();
+  cin.getline(key, 1000);
 
   lower_char(key);
 
@@ -325,9 +335,11 @@ void encrypt_vigenere() {
 void decrypt_vigenere() {
   char msg[1000], key[1000];
   cout << "\nType the message to decrypt: ";
-  cin >> msg;
+  cin.ignore();
+  cin.getline(msg, 1000);
   cout << "\nEnter the alfabetic key: ";
-  cin >> key;
+  cin.ignore();
+  cin.getline(key, 1000);
 
   lower_char(key);
 
