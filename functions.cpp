@@ -63,8 +63,7 @@ void decrypt_reverse() {
 }
 
 void encrypt_caesar() {
-
-  char msg[1000], ch;
+  char msg[1000];
   cout << "\nType the message to encrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
@@ -72,24 +71,12 @@ void encrypt_caesar() {
   int key = 3, unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    ch = msg[i];
-
-    if (ch >= 'a' && ch <= 'z') {
-      ch = ch + key;
-
-      if (ch > 'z') {
-        ch = ch - 'z' + 'a' - 1;
-      }
-
-      msg[i] = ch;
-    } else if (ch >= 'A' && ch <= 'Z') {
-      ch = ch + key;
-
-      if (ch > 'Z') {
-        ch = ch - 'Z' + 'A' - 1;
-      }
-
-      msg[i] = ch;
+    if (msg[i] >= 65 && msg[i] <= 90) {
+      msg[i] = ((msg[i] - 65 + key) % 26) + 65;
+    } else if (msg[i] >= 97 && msg[i] <= 122) {
+      msg[i] = ((msg[i] - 97 + key) % 26) + 97;
+    } else {
+      unknown_chars_count++;
     }
   }
 
@@ -101,7 +88,7 @@ void encrypt_caesar() {
 }
 
 void decrypt_caesar() {
-  char msg[1000], ch;
+  char msg[1000];
   cout << "\nType the message to decrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
@@ -109,24 +96,12 @@ void decrypt_caesar() {
   int key = 3, unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    ch = msg[i];
-
-    if (ch >= 'a' && ch <= 'z') {
-      ch = ch - key;
-
-      if (ch > 'z') {
-        ch = ch - 'z' + 'a' - 1;
-      }
-
-      msg[i] = ch;
-    } else if (ch >= 'A' && ch <= 'Z') {
-      ch = ch - key;
-
-      if (ch > 'Z') {
-        ch = ch - 'Z' + 'A' - 1;
-      }
-
-      msg[i] = ch;
+    if (msg[i] >= 65 && msg[i] <= 90) {
+      msg[i] = ((msg[i] - 65 - key) % 26) + 65;
+    } else if (msg[i] >= 97 && msg[i] <= 122) {
+      msg[i] = ((msg[i] - 97 - key) % 26) + 97;
+    } else {
+      unknown_chars_count++;
     }
   }
 
@@ -138,7 +113,7 @@ void decrypt_caesar() {
 }
 
 void encrypt_ROT13() {
-  char msg[1000], ch;
+  char msg[1000];
   cout << "\nType the message to encrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
@@ -146,24 +121,12 @@ void encrypt_ROT13() {
   int key = 13, unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    ch = msg[i];
-
-    if (ch >= 'a' && ch <= 'z') {
-      ch = ch + key;
-
-      if (ch > 'z') {
-        ch = ch - 'z' + 'a' - 1;
-      }
-
-      msg[i] = ch;
-    } else if (ch >= 'A' && ch <= 'Z') {
-      ch = ch + key;
-
-      if (ch > 'Z') {
-        ch = ch - 'Z' + 'A' - 1;
-      }
-
-      msg[i] = ch;
+    if (msg[i] >= 65 && msg[i] <= 90) {
+      msg[i] = ((msg[i] + key) % 26) + 65;
+    } else if (msg[i] >= 97 && msg[i] <= 122) {
+      msg[i] = ((msg[i] + key) % 26) + 97;
+    } else {
+      unknown_chars_count++;
     }
   }
 
@@ -175,7 +138,7 @@ void encrypt_ROT13() {
 }
 
 void decrypt_ROT13() {
-  char msg[1000], ch;
+  char msg[1000];
   cout << "\nType the message to decrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
@@ -183,24 +146,12 @@ void decrypt_ROT13() {
   int key = 13, unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    ch = msg[i];
-
-    if (ch >= 'a' && ch <= 'z') {
-      ch = ch - key;
-
-      if (ch > 'z') {
-        ch = ch - 'z' + 'a' - 1;
-      }
-
-      msg[i] = ch;
-    } else if (ch >= 'A' && ch <= 'Z') {
-      ch = ch - key;
-
-      if (ch > 'Z') {
-        ch = ch - 'Z' + 'A' - 1;
-      }
-
-      msg[i] = ch;
+    if (msg[i] >= 65 && msg[i] <= 90) {
+      msg[i] = ((msg[i] - key) % 26) + 65;
+    } else if (msg[i] >= 97 && msg[i] <= 122) {
+      msg[i] = ((msg[i] - key) % 26) + 97;
+    } else {
+      unknown_chars_count++;
     }
   }
 
@@ -212,7 +163,7 @@ void decrypt_ROT13() {
 }
 
 void encrypt_ROT_X() {
-  char msg[1000], ch;
+  char msg[1000];
   int key = 0;
   cout << "\nType the message to encrypt: ";
   cin.ignore();
@@ -223,24 +174,12 @@ void encrypt_ROT_X() {
   int unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    ch = msg[i];
-
-    if (ch >= 'a' && ch <= 'z') {
-      ch = ch + key;
-
-      if (ch > 'z') {
-        ch = ch - 'z' + 'a' - 1;
-      }
-
-      msg[i] = ch;
-    } else if (ch >= 'A' && ch <= 'Z') {
-      ch = ch + key;
-
-      if (ch > 'Z') {
-        ch = ch - 'Z' + 'A' - 1;
-      }
-
-      msg[i] = ch;
+    if (msg[i] >= 65 && msg[i] <= 90) {
+      msg[i] = ((msg[i] - key) % 26) + 65;
+    } else if (msg[i] >= 97 && msg[i] <= 122) {
+      msg[i] = ((msg[i] - key) % 26) + 97;
+    } else {
+      unknown_chars_count++;
     }
   }
 
@@ -252,7 +191,7 @@ void encrypt_ROT_X() {
 }
 
 void decrypt_ROT_X() {
-  char msg[1000], ch;
+  char msg[1000];
   int key = 0;
   cout << "\nType the message to decrypt: ";
   cin.ignore();
@@ -263,24 +202,12 @@ void decrypt_ROT_X() {
   int unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    ch = msg[i];
-
-    if (ch >= 'a' && ch <= 'z') {
-      ch = ch - key;
-
-      if (ch > 'z') {
-        ch = ch - 'z' + 'a' - 1;
-      }
-
-      msg[i] = ch;
-    } else if (ch >= 'A' && ch <= 'Z') {
-      ch = ch - key;
-
-      if (ch > 'Z') {
-        ch = ch - 'Z' + 'A' - 1;
-      }
-
-      msg[i] = ch;
+    if (msg[i] >= 65 && msg[i] <= 90) {
+      msg[i] = ((msg[i] + key) % 26) + 65;
+    } else if (msg[i] >= 97 && msg[i] <= 122) {
+      msg[i] = ((msg[i] + key) % 26) + 97;
+    } else {
+      unknown_chars_count++;
     }
   }
 
