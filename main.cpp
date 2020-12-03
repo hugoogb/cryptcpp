@@ -12,11 +12,11 @@ int main() {
     cout << "\t--------" << endl;
     cout << "\t| MENU |" << endl;
     cout << "\t--------" << endl;
-    cout << "1. Reverse cypher" << endl;
-    cout << "2. Caesar cypher" << endl;
-    cout << "3. ROT13 cypher" << endl;
-    cout << "4. ROT_X cypher" << endl;
-    cout << "5. Vigenere cypher" << endl;
+    cout << "1. Reverse cipher" << endl;
+    cout << "2. Caesar cipher" << endl;
+    cout << "3. ROT13 cipher" << endl;
+    cout << "4. ROT_X cipher" << endl;
+    cout << "5. Vigenere cipher" << endl;
     cout << "6. Exit" << endl;
     cout << "\nPick an option: ";
     cin >> option_1;
@@ -26,7 +26,7 @@ int main() {
       system("clear");
       do {
         cout << "\t------------------" << endl;
-        cout << "\t| Reverse cypher |" << endl;
+        cout << "\t| Reverse cipher |" << endl;
         cout << "\t------------------" << endl;
         cout << "1. Encrypt" << endl;
         cout << "2. Decrypt" << endl;
@@ -50,7 +50,7 @@ int main() {
       system("clear");
       do {
         cout << "\t-----------------" << endl;
-        cout << "\t| Caesar cypher |" << endl;
+        cout << "\t| Caesar cipher |" << endl;
         cout << "\t-----------------" << endl;
         cout << "1. Encrypt" << endl;
         cout << "2. Decrypt" << endl;
@@ -74,7 +74,7 @@ int main() {
       system("clear");
       do {
         cout << "\t----------------" << endl;
-        cout << "\t| ROT13 cypher |" << endl;
+        cout << "\t| ROT13 cipher |" << endl;
         cout << "\t----------------" << endl;
         cout << "1. Encrypt" << endl;
         cout << "2. Decrypt" << endl;
@@ -98,7 +98,7 @@ int main() {
       system("clear");
       do {
         cout << "\t----------------" << endl;
-        cout << "\t| ROT_X cypher |" << endl;
+        cout << "\t| ROT_X cipher |" << endl;
         cout << "\t----------------" << endl;
         cout << "1. Encrypt" << endl;
         cout << "2. Decrypt" << endl;
@@ -122,7 +122,7 @@ int main() {
       system("clear");
       do {
         cout << "\t-------------------" << endl;
-        cout << "\t| Vigenere cypher |" << endl;
+        cout << "\t| Vigenere cipher |" << endl;
         cout << "\t-------------------" << endl;
         cout << "1. Encrypt" << endl;
         cout << "2. Decrypt" << endl;
