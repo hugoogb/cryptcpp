@@ -72,9 +72,9 @@ void encrypt_caesar() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = ((msg[i] - 65 + key) % 26) + 65;
+      msg[i] = (msg[i] - 65 + key) % 26 + 65;
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = ((msg[i] - 97 + key) % 26) + 97;
+      msg[i] = (msg[i] - 97 + key) % 26 + 97;
     } else {
       unknown_chars_count++;
     }
@@ -97,9 +97,9 @@ void decrypt_caesar() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = ((msg[i] - 65 - key) % 26) + 65;
+      msg[i] = (msg[i] - 65 - key) % 26 + 65;
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = ((msg[i] - 97 - key) % 26) + 97;
+      msg[i] = (msg[i] - 97 - key) % 26 + 97;
     } else {
       unknown_chars_count++;
     }
@@ -122,9 +122,9 @@ void encrypt_ROT13() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = ((msg[i] + key) % 26) + 65;
+      msg[i] = (msg[i] - 65 + key) % 26 + 65;
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = ((msg[i] + key) % 26) + 97;
+      msg[i] = (msg[i] - 97 + key) % 26 + 97;
     } else {
       unknown_chars_count++;
     }
@@ -147,9 +147,17 @@ void decrypt_ROT13() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = ((msg[i] - key) % 26) + 65;
+      if (msg[i] < 78) {
+        msg[i] = (msg[i] - 65 + key) % 26 + 65;
+      } else {
+        msg[i] = (msg[i] - 65 - key) % 26 + 65;
+      }
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = ((msg[i] - key) % 26) + 97;
+      if (msg[i] < 110) {
+        msg[i] = (msg[i] - 97 + key) % 26 + 97;
+      } else {
+        msg[i] = (msg[i] - 97 - key) % 26 + 97;
+      }
     } else {
       unknown_chars_count++;
     }
