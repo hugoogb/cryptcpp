@@ -154,17 +154,17 @@ void decrypt_ROT13() {
   int key = 13, unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    if (msg[i] >= 65 && msg[i] <= 90) {
-      if (msg[i] < (65 + key)) {
-        msg[i] = (msg[i] - 65 + key) % 26 + 65;
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      if (((msg[i] - 'A' - key) % 26) < 0) {
+        msg[i] = (msg[i] - 'A' - key) % 26 + 91;
       } else {
-        msg[i] = (msg[i] - 65 - key) % 26 + 65;
+        msg[i] = (msg[i] - 'A' - key) % 26 + 'A';
       }
-    } else if (msg[i] >= 97 && msg[i] <= 122) {
-      if (msg[i] < (97 + key)) {
-        msg[i] = (msg[i] - 97 + key) % 26 + 97;
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      if (((msg[i] - 'a' - key) % 26) < 0) {
+        msg[i] = (msg[i] - 'a' - key) % 26 + 123;
       } else {
-        msg[i] = (msg[i] - 97 - key) % 26 + 97;
+        msg[i] = (msg[i] - 'a' - key) % 26 + 'a';
       }
     } else {
       unknown_chars_count++;
@@ -218,17 +218,17 @@ void decrypt_ROT_X() {
   int unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    if (msg[i] >= 65 && msg[i] <= 90) {
-      if (msg[i] > (65 + key)) {
-        msg[i] = (msg[i] - 90 - key) % 26 + 90;
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      if (((msg[i] - 'A' - key) % 26) < 0) {
+        msg[i] = (msg[i] - 'A' - key) % 26 + 91;
       } else {
-        msg[i] = (msg[i] - 65 - key) % 26 + 65;
+        msg[i] = (msg[i] - 'A' - key) % 26 + 'A';
       }
-    } else if (msg[i] >= 97 && msg[i] <= 122) {
-      if (msg[i] > (97 + key)) {
-        msg[i] = (msg[i] - 122 - key) % 26 + 122;
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      if (((msg[i] - 'a' - key) % 26) < 0) {
+        msg[i] = (msg[i] - 'a' - key) % 26 + 123;
       } else {
-        msg[i] = (msg[i] - 97 - key) % 26 + 97;
+        msg[i] = (msg[i] - 'a' - key) % 26 + 'a';
       }
     } else {
       unknown_chars_count++;
