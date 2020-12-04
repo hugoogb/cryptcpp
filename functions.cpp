@@ -147,13 +147,13 @@ void decrypt_ROT13() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      if (msg[i] < 78) {
+      if (msg[i] < (65 + key)) {
         msg[i] = (msg[i] - 65 + key) % 26 + 65;
       } else {
         msg[i] = (msg[i] - 65 - key) % 26 + 65;
       }
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      if (msg[i] < 110) {
+      if (msg[i] < (97 + key)) {
         msg[i] = (msg[i] - 97 + key) % 26 + 97;
       } else {
         msg[i] = (msg[i] - 97 - key) % 26 + 97;
@@ -173,19 +173,19 @@ void decrypt_ROT13() {
 void encrypt_ROT_X() {
   char msg[1000];
   int key = 0;
+  cout << "\nEnter the numeric key: ";
+  cin >> key;
   cout << "\nType the message to encrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
-  cout << "\nEnter the numeric key: ";
-  cin >> key;
 
   int unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = ((msg[i] - key) % 26) + 65;
+      msg[i] = (msg[i] - 65 + key) % 26 + 65;
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = ((msg[i] - key) % 26) + 97;
+      msg[i] = (msg[i] - 97 + key) % 26 + 97;
     } else {
       unknown_chars_count++;
     }
@@ -201,19 +201,27 @@ void encrypt_ROT_X() {
 void decrypt_ROT_X() {
   char msg[1000];
   int key = 0;
+  cout << "\nEnter the numeric key: ";
+  cin >> key;
   cout << "\nType the message to decrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
-  cout << "\nEnter the numeric key: ";
-  cin >> key;
 
   int unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = ((msg[i] + key) % 26) + 65;
+      if (msg[i] > (65 + key)) {
+        msg[i] = (msg[i] - 90 - key) % 26 + 90;
+      } else {
+        msg[i] = (msg[i] - 65 - key) % 26 + 65;
+      }
     } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = ((msg[i] + key) % 26) + 97;
+      if (msg[i] > (97 + key)) {
+        msg[i] = (msg[i] - 122 - key) % 26 + 122;
+      } else {
+        msg[i] = (msg[i] - 97 - key) % 26 + 97;
+      }
     } else {
       unknown_chars_count++;
     }
