@@ -5,18 +5,6 @@
 
 using namespace std;
 
-char alfabet_M[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-                    'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-                    'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-char alfabet_m[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-                    'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-                    's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-
-void unknown_chars_message(int unknown_chars_count) {
-  cout << "Found " << unknown_chars_count << " unknown characters in message..."
-       << endl;
-}
-
 void lower_char(char *str) {
   int i = 0;
 
@@ -80,10 +68,6 @@ void encrypt_caesar() {
   }
 
   cout << "\nEncrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
 
 void decrypt_caesar() {
@@ -113,10 +97,6 @@ void decrypt_caesar() {
   }
 
   cout << "\nDecrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
 
 void encrypt_ROT13() {
@@ -171,10 +151,6 @@ void decrypt_ROT13() {
   }
 
   cout << "\nDecrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
 
 void encrypt_ROT_X() {
@@ -199,10 +175,6 @@ void encrypt_ROT_X() {
   }
 
   cout << "\nEncrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
 
 void decrypt_ROT_X() {
@@ -235,10 +207,6 @@ void decrypt_ROT_X() {
   }
 
   cout << "\nDecrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
 
 // This function generates the key in
@@ -321,10 +289,6 @@ void encrypt_vigenere() {
   cout << full_key << endl;
 
   cout << "\nEncrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
 
 void decrypt_vigenere() {
@@ -361,11 +325,5 @@ void decrypt_vigenere() {
     }
   }
 
-  cout << full_key << endl;
-
   cout << "\nDecrypted message: " << msg << endl << endl;
-
-  if (unknown_chars_count != 0) {
-    unknown_chars_message(unknown_chars_count);
-  }
 }
