@@ -243,34 +243,20 @@ void decrypt_ROT_X() {
 }
 
 void encrypt_vigenere() {
+  char msg[1000], key[1000];
 
-  char msg[1000];
-  char key[1000];
-  cout << "\nType the message to encrypt: ";
-  cin.ignore();
-  cin.getline(msg, 1000);
-  cout << "\nEnter the alfabetic key: ";
-  cin.ignore();
-  cin.getline(key, 1000);
+  // cout << "\nEnter the alfabetic key: ";
+  // cin.ignore();
+  // cin.getline(key, 1000);
+  // cout << "\nType the message to encrypt: ";
+  // cin.ignore();
+  // cin.getline(msg, 1000);
 
   lower_char(key);
 
-  int k = 0, aux_1 = 0, aux_2 = 0, aux_3 = 0, unknown_chars_count = 0;
-  for (size_t i = 0; i < strlen(msg); i++) {
-    if (msg[i] >= 65 && msg[i] <= 90 && msg[i] >= 97 && msg[i] <= 122) {
-      for (size_t j = 0; j < strlen(alfabet_m); j++) {
-        if (msg[i] == alfabet_m[j]) {
-          aux_1 = j;
-        }
-        if (key[k % strlen(key)] == alfabet_m[j]) {
-          aux_2 = j;
-        }
-      }
-      aux_3 = (aux_1 + aux_2) % 26;
-      msg[i] = alfabet_m[aux_3];
-      k++;
-    }
-  }
+  int unknown_chars_count = 0;
+
+  cout << "\n -->> Development in process..." << endl << endl;
 
   cout << "\nEncrypted message: " << msg << endl << endl;
 
@@ -281,36 +267,19 @@ void encrypt_vigenere() {
 
 void decrypt_vigenere() {
   char msg[1000], key[1000];
-  cout << "\nType the message to decrypt: ";
-  cin.ignore();
-  cin.getline(msg, 1000);
-  cout << "\nEnter the alfabetic key: ";
-  cin.ignore();
-  cin.getline(key, 1000);
+
+  // cout << "\nEnter the alfabetic key: ";
+  // cin.ignore();
+  // cin.getline(key, 1000);
+  // cout << "\nType the message to decrypt: ";
+  // cin.ignore();
+  // cin.getline(msg, 1000);
 
   lower_char(key);
 
-  int k = 0, aux_1 = 0, aux_2 = 0, aux_3 = 0, unknown_chars_count = 0;
+  int unknown_chars_count = 0;
 
-  for (size_t i = 0; i < strlen(msg); i++) {
-    if (msg[i] >= 65 && msg[i] <= 90 && msg[i] >= 97 && msg[i] <= 122) {
-      for (size_t j = 0; j < strlen(alfabet_m); j++) {
-        if (msg[i] == alfabet_m[j]) {
-          aux_1 = j;
-        }
-        if (key[k % strlen(key)] == alfabet_m[j]) {
-          aux_2 = j;
-        }
-        if ((aux_1 - aux_2) < 0) {
-          aux_3 = (aux_1 - aux_2) + 26;
-        } else {
-          aux_3 = (aux_1 - aux_2) % 26;
-        }
-      }
-      msg[i] = alfabet_m[aux_3];
-      k++;
-    }
-  }
+  cout << "\n -->> Development in process..." << endl << endl;
 
   cout << "\nDecrypted message: " << msg << endl << endl;
 
