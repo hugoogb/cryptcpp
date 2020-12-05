@@ -39,12 +39,6 @@ void reverse_char(char *str) {
   }
 }
 
-void generate_vigenere_key(char *str, char *key, char *full_key) {
-  for (size_t i = 0; i < strlen(str); i++) {
-
-  }
-}
-
 void encrypt_reverse() {
   char msg[1000];
   cout << "\nType the message to encrypt: ";
