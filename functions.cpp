@@ -97,13 +97,13 @@ void decrypt_caesar() {
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 'A' && msg[i] <= 'Z') {
       if (((msg[i] - 'A' - key) % 26) < 0) {
-        msg[i] = (msg[i] - 'A' - key) % 26 + 91;
+        msg[i] = (msg[i] - 'A' - key) % 26 + 'A' + 26;
       } else {
         msg[i] = (msg[i] - 'A' - key) % 26 + 'A';
       }
     } else if (msg[i] >= 'a' && msg[i] <= 'z') {
       if (((msg[i] - 'a' - key) % 26) < 0) {
-        msg[i] = (msg[i] - 'a' - key) % 26 + 123;
+        msg[i] = (msg[i] - 'a' - key) % 26 + 'a' + 26;
       } else {
         msg[i] = (msg[i] - 'a' - key) % 26 + 'a';
       }
@@ -155,13 +155,13 @@ void decrypt_ROT13() {
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 'A' && msg[i] <= 'Z') {
       if (((msg[i] - 'A' - key) % 26) < 0) {
-        msg[i] = (msg[i] - 'A' - key) % 26 + 91;
+        msg[i] = (msg[i] - 'A' - key) % 26 + 'A' + 26;
       } else {
         msg[i] = (msg[i] - 'A' - key) % 26 + 'A';
       }
     } else if (msg[i] >= 'a' && msg[i] <= 'z') {
       if (((msg[i] - 'a' - key) % 26) < 0) {
-        msg[i] = (msg[i] - 'a' - key) % 26 + 123;
+        msg[i] = (msg[i] - 'a' - key) % 26 + 'a' + 26;
       } else {
         msg[i] = (msg[i] - 'a' - key) % 26 + 'a';
       }
@@ -219,13 +219,13 @@ void decrypt_ROT_X() {
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 'A' && msg[i] <= 'Z') {
       if (((msg[i] - 'A' - key) % 26) < 0) {
-        msg[i] = (msg[i] - 'A' - key) % 26 + 91;
+        msg[i] = (msg[i] - 'A' - key) % 26 + 'A' + 26;
       } else {
         msg[i] = (msg[i] - 'A' - key) % 26 + 'A';
       }
     } else if (msg[i] >= 'a' && msg[i] <= 'z') {
       if (((msg[i] - 'a' - key) % 26) < 0) {
-        msg[i] = (msg[i] - 'a' - key) % 26 + 123;
+        msg[i] = (msg[i] - 'a' - key) % 26 + 'a' + 26;
       } else {
         msg[i] = (msg[i] - 'a' - key) % 26 + 'a';
       }
@@ -241,21 +241,39 @@ void decrypt_ROT_X() {
   }
 }
 
-void encrypt_vigenere() {
-  char msg[1000], key[1000];
+void generate_vigenere_key(char *str, char *key, char *full_key) {
+  char key2[1000];
 
-  // cout << "\nEnter the alfabetic key: ";
-  // cin.ignore();
-  // cin.getline(key, 1000);
-  // cout << "\nType the message to encrypt: ";
-  // cin.ignore();
-  // cin.getline(msg, 1000);
+  strcpy(key2, key);
+
+  while (strlen(key) < strlen(str)) {
+    strcat(key, key2);
+  }
+
+  strncpy(full_key, key, (strlen(str) + 1));
+
+  full_key[strlen(str) + 2] = '\0';
+}
+
+void encrypt_vigenere() {
+  char msg[1000], key[1000], full_key[1000];
+
+  cout << "\nEnter the alfabetic key: ";
+  cin.ignore();
+  cin.getline(key, 1000);
+  cout << "\nType the message to encrypt: ";
+  cin.ignore();
+  cin.getline(msg, 1000);
 
   lower_char(key);
 
   int unknown_chars_count = 0;
 
-  cout << "\n -->> Development in process..." << endl << endl;
+  generate_vigenere_key(msg, key, full_key);
+
+  cout << full_key << endl << endl;
+
+  // cout << "\n -->> Development in process..." << endl << endl;
 
   cout << "\nEncrypted message: " << msg << endl << endl;
 
@@ -265,20 +283,24 @@ void encrypt_vigenere() {
 }
 
 void decrypt_vigenere() {
-  char msg[1000], key[1000];
+  char msg[1000], key[1000], full_key[1000];
 
-  // cout << "\nEnter the alfabetic key: ";
-  // cin.ignore();
-  // cin.getline(key, 1000);
-  // cout << "\nType the message to decrypt: ";
-  // cin.ignore();
-  // cin.getline(msg, 1000);
+  cout << "\nEnter the alfabetic key: ";
+  cin.ignore();
+  cin.getline(key, 1000);
+  cout << "\nType the message to decrypt: ";
+  cin.ignore();
+  cin.getline(msg, 1000);
 
   lower_char(key);
 
   int unknown_chars_count = 0;
 
-  cout << "\n -->> Development in process..." << endl << endl;
+  generate_vigenere_key(msg, key, full_key);
+
+  cout << full_key << endl << endl;
+
+  // cout << "\n -->> Development in process..." << endl << endl;
 
   cout << "\nDecrypted message: " << msg << endl << endl;
 
