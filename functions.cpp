@@ -71,7 +71,7 @@ void encrypt_caesar() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 'A' && msg[i] <= 'Z') {
-      msg[i] = (msg[i] - 'A' + key) % 26 + 'a';
+      msg[i] = (msg[i] - 'A' + key) % 26 + 'A';
     } else if (msg[i] >= 'a' && msg[i] <= 'z') {
       msg[i] = (msg[i] - 'a' + key) % 26 + 'a';
     } else {
@@ -241,18 +241,55 @@ void decrypt_ROT_X() {
   }
 }
 
-void generate_vigenere_key(char *str, char *key, char *full_key) {
-  char key2[1000];
+// This function generates the key in
+// a cyclic manner until it's length isi'nt
+// equal to the length of original text
+string generateKey(string str, string key) {
+  int len = str.size();
 
-  strcpy(key2, key);
-
-  while (strlen(key) < strlen(str)) {
-    strcat(key, key2);
+  for (int i = 0;; i++) {
+    if (len == i)
+      i = 0;
+    if (key.size() == str.size())
+      break;
+    key.push_back(key[i]);
   }
 
-  strncpy(full_key, key, (strlen(str) + 1));
+  return key;
+}
 
-  full_key[strlen(str) + 2] = '\0';
+// This function returns the encrypted text
+// generated with the help of the key
+string cipherText(string str, string key) {
+  string cipher_text;
+
+  for (int i = 0; i < str.size(); i++) {
+    // converting in range 0-25
+    char ch = (str[i] + key[i]) % 26;
+
+    // convert into alphabets(ASCII)
+    ch += 'A';
+
+    cipher_text.push_back(ch);
+  }
+
+  return cipher_text;
+}
+
+// This function decrypts the encrypted text
+// and returns the original text
+string originalText(string cipher_text, string key) {
+  string orig_text;
+
+  for (int i = 0; i < cipher_text.size(); i++) {
+    // converting in range 0-25
+    char x = (cipher_text[i] - key[i] + 26) % 26;
+
+    // convert into alphabets(ASCII)
+    x += 'A';
+    orig_text.push_back(x);
+  }
+  return orig_text;
 }
 
 void encrypt_vigenere() {
@@ -271,9 +308,17 @@ void encrypt_vigenere() {
 
   generate_vigenere_key(msg, key, full_key);
 
-  cout << full_key << endl << endl;
+  for (size_t i = 0; i < strlen(msg); ++i) {
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      msg[i] = ((msg[i] - 'A') + (full_key[i] - 'a')) % 26 + 'A' + 1;
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      msg[i] = ((msg[i] - 'a') + (full_key[i] - 'a')) % 26 + 'a' - 1;
+    } else {
+      unknown_chars_count++;
+    }
+  }
 
-  // cout << "\n -->> Development in process..." << endl << endl;
+  cout << full_key << endl;
 
   cout << "\nEncrypted message: " << msg << endl << endl;
 
@@ -298,9 +343,25 @@ void decrypt_vigenere() {
 
   generate_vigenere_key(msg, key, full_key);
 
-  cout << full_key << endl << endl;
+  for (size_t i = 0; i < strlen(msg); ++i) {
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      if (((msg[i] - 'A') - (full_key[i] - 'a')) < 0) {
+        msg[i] = ((msg[i] - 'A') - (full_key[i] - 'a')) % 26 + 'A' + 26;
+      } else {
+        msg[i] = ((msg[i] - 'A') - (full_key[i] - 'a')) % 26 + 'A';
+      }
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      if (((msg[i] - 'a') - (full_key[i] - 'a')) < 0) {
+        msg[i] = ((msg[i] - 'a') - (full_key[i] - 'a')) % 26 + 'a' + 26;
+      } else {
+        msg[i] = ((msg[i] - 'a') - (full_key[i] - 'a')) % 26 + 'a';
+      }
+    } else {
+      unknown_chars_count++;
+    }
+  }
 
-  // cout << "\n -->> Development in process..." << endl << endl;
+  cout << full_key << endl;
 
   cout << "\nDecrypted message: " << msg << endl << endl;
 
