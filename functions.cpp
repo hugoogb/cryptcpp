@@ -39,8 +39,13 @@ void reverse_char(char *str) {
   }
 }
 
-void encrypt_reverse() {
+void generate_vigenere_key(char *str, char *key, char *full_key) {
+  for (size_t i = 0; i < strlen(str); i++) {
 
+  }
+}
+
+void encrypt_reverse() {
   char msg[1000];
   cout << "\nType the message to encrypt: ";
   cin.ignore();
@@ -190,10 +195,10 @@ void encrypt_ROT_X() {
   int unknown_chars_count = 0;
 
   for (size_t i = 0; i < strlen(msg); ++i) {
-    if (msg[i] >= 65 && msg[i] <= 90) {
-      msg[i] = (msg[i] - 65 + key) % 26 + 65;
-    } else if (msg[i] >= 97 && msg[i] <= 122) {
-      msg[i] = (msg[i] - 97 + key) % 26 + 97;
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      msg[i] = (msg[i] - 'A' + key) % 26 + 'A';
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      msg[i] = (msg[i] - 'a' + key) % 26 + 'a';
     } else {
       unknown_chars_count++;
     }
@@ -243,9 +248,7 @@ void decrypt_ROT_X() {
 }
 
 void encrypt_vigenere() {
-
-  char msg[1000];
-  char key[1000];
+  char msg[1000], key[1000], full_key[1000];
   cout << "\nType the message to encrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
@@ -255,20 +258,17 @@ void encrypt_vigenere() {
 
   lower_char(key);
 
-  int k = 0, aux_1 = 0, aux_2 = 0, aux_3 = 0, unknown_chars_count = 0;
+  int unknown_chars_count = 0;
+
+  generate_vigenere_key(msg, key, full_key);
+
   for (size_t i = 0; i < strlen(msg); i++) {
-    if (msg[i] >= 65 && msg[i] <= 90 && msg[i] >= 97 && msg[i] <= 122) {
-      for (size_t j = 0; j < strlen(alfabet_m); j++) {
-        if (msg[i] == alfabet_m[j]) {
-          aux_1 = j;
-        }
-        if (key[k % strlen(key)] == alfabet_m[j]) {
-          aux_2 = j;
-        }
-      }
-      aux_3 = (aux_1 + aux_2) % 26;
-      msg[i] = alfabet_m[aux_3];
-      k++;
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      msg[i] = ((msg[i] - 'A' + full_key[i]) % 26) + 'A';
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      msg[i] = ((msg[i] - 'a' + full_key[i]) % 26) + 'a';
+    } else {
+      unknown_chars_count++;
     }
   }
 
@@ -280,7 +280,7 @@ void encrypt_vigenere() {
 }
 
 void decrypt_vigenere() {
-  char msg[1000], key[1000];
+  char msg[1000], key[1000], full_key[1000];
   cout << "\nType the message to decrypt: ";
   cin.ignore();
   cin.getline(msg, 1000);
@@ -290,25 +290,25 @@ void decrypt_vigenere() {
 
   lower_char(key);
 
-  int k = 0, aux_1 = 0, aux_2 = 0, aux_3 = 0, unknown_chars_count = 0;
+  int unknown_chars_count = 0;
 
-  for (size_t i = 0; i < strlen(msg); i++) {
-    if (msg[i] >= 65 && msg[i] <= 90 && msg[i] >= 97 && msg[i] <= 122) {
-      for (size_t j = 0; j < strlen(alfabet_m); j++) {
-        if (msg[i] == alfabet_m[j]) {
-          aux_1 = j;
-        }
-        if (key[k % strlen(key)] == alfabet_m[j]) {
-          aux_2 = j;
-        }
-        if ((aux_1 - aux_2) < 0) {
-          aux_3 = (aux_1 - aux_2) + 26;
-        } else {
-          aux_3 = (aux_1 - aux_2) % 26;
-        }
+  generate_vigenere_key(msg, key, full_key);
+
+  for (size_t i = 0; i < strlen(msg); ++i) {
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      if (((msg[i] - 'a' - full_key[i]) % 26) < 0) {
+        msg[i] = ((msg[i] - 'A' - full_key[i]) + 26) % 26 + 91;
+      } else {
+        msg[i] = ((msg[i] - 'A' - full_key[i]) + 26) % 26 + 'A';
       }
-      msg[i] = alfabet_m[aux_3];
-      k++;
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      if (((msg[i] - 'a' - full_key[i]) % 26) < 0) {
+        msg[i] = ((msg[i] - 'a' - full_key[i]) + 26) % 26 + 123;
+      } else {
+        msg[i] = ((msg[i] - 'a' - full_key[i]) + 26) % 26 + 'a';
+      }
+    } else {
+      unknown_chars_count++;
     }
   }
 
