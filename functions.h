@@ -16,5 +16,7 @@ void decrypt_ROT13();
 void encrypt_ROT_X();
 void decrypt_ROT_X();
 
+void generate_vigenere_key(char *str, char *key, char *full_key);
+
 void encrypt_vigenere();
 void decrypt_vigenere();
