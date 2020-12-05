@@ -71,7 +71,7 @@ void encrypt_caesar() {
 
   for (size_t i = 0; i < strlen(msg); ++i) {
     if (msg[i] >= 'A' && msg[i] <= 'Z') {
-      msg[i] = (msg[i] - 'A' + key) % 26 + 'a';
+      msg[i] = (msg[i] - 'A' + key) % 26 + 'A';
     } else if (msg[i] >= 'a' && msg[i] <= 'z') {
       msg[i] = (msg[i] - 'a' + key) % 26 + 'a';
     } else {
@@ -271,9 +271,15 @@ void encrypt_vigenere() {
 
   generate_vigenere_key(msg, key, full_key);
 
-  cout << full_key << endl << endl;
-
-  // cout << "\n -->> Development in process..." << endl << endl;
+  for (size_t i = 0; i < strlen(msg); ++i) {
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      msg[i] = (msg[i] - 'A' + full_key[i]) % 26 + 'A';
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      msg[i] = (msg[i] - 'a' + full_key[i]) % 26 + 'a';
+    } else {
+      unknown_chars_count++;
+    }
+  }
 
   cout << "\nEncrypted message: " << msg << endl << endl;
 
@@ -298,9 +304,23 @@ void decrypt_vigenere() {
 
   generate_vigenere_key(msg, key, full_key);
 
-  cout << full_key << endl << endl;
-
-  // cout << "\n -->> Development in process..." << endl << endl;
+  for (size_t i = 0; i < strlen(msg); ++i) {
+    if (msg[i] >= 'A' && msg[i] <= 'Z') {
+      if (((msg[i] - 'A' - full_key[i]) % 26) < 0) {
+        msg[i] = (msg[i] - 'A' - full_key[i]) % 26 + 'A' + 26;
+      } else {
+        msg[i] = (msg[i] - 'A' - full_key[i]) % 26 + 'A';
+      }
+    } else if (msg[i] >= 'a' && msg[i] <= 'z') {
+      if (((msg[i] - 'a' - full_key[i]) % 26) < 0) {
+        msg[i] = (msg[i] - 'a' - full_key[i]) % 26 + 'a' + 26;
+      } else {
+        msg[i] = (msg[i] - 'a' - full_key[i]) % 26 + 'a';
+      }
+    } else {
+      unknown_chars_count++;
+    }
+  }
 
   cout << "\nDecrypted message: " << msg << endl << endl;
 
