@@ -28,11 +28,7 @@ git clone https://github.com/hugoogb/cryptography-cpp.git
 make
 ```
 
-If you want to clean the directory (executable and .o):
-
-```sh
-make clean
-```
+If you want to clean the directory (executable and .o): ```make clean```
 
 - 3. Execute the main binary created
 
