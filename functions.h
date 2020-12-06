@@ -1,22 +1,36 @@
-void unknown_chars_message(int unknown_chars_count);
+#include <iostream>
+#include <string.h>
+#include <algorithm>
 
-void lower_char(char *str);
+using namespace std;
 
-void reverse_char(char *str);
+#define CAESAR_KEY 3
+#define ROT13_KEY 13
 
-void encrypt_reverse();
-void decrypt_reverse();
+// Function: reverse transformation encode
+string reverse_encode(string plainText);
+// Function: reverse transformaton decode
+string reverse_decode(string cipherText);
 
-void encrypt_caesar();
-void decrypt_caesar();
+// Function: Caesar cipher encode
+string caesar_encode(string plainText, int key);
+// Function: Caesar cipher decode
+string caesar_decode(string cipherText, int key);
 
-void encrypt_ROT13();
-void decrypt_ROT13();
+// Function: ROT13 cipher encode
+string ROT13_encode(string plainText, int key);
+// Function: ROT13 cipher decode
+string ROT13_decode(string cipherText, int key);
 
-void encrypt_ROT_X();
-void decrypt_ROT_X();
+// Function: ROT_X (you type the numeric key that you want) cipher encode
+string ROT_X_encode(string plainText, int key);
+// Function: ROT_X (you type the numeric key that you want) cipher decode
+string ROT_X_decode(string cipherText, int key);
 
-void generate_vigenere_key(char *str, char *key, char *full_key);
+// Function: Vigenère key generator
+string vigenere_key_gen(string str, string key);
 
-void encrypt_vigenere();
-void decrypt_vigenere();
+// Function: Vigenère cipher encode
+string vigenere_encode(string plainText, string key);
+// Function: Vigenère cipher decode
+string vigenere_decode(string cipherText, string key);
