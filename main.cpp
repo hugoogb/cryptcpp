@@ -1,45 +1,51 @@
-#include <iostream>
-
 #include "functions.h"
 
-using namespace std;
+void menu_cipher() {
+  cout << "\t--------" << endl;
+  cout << "\t| MENU |" << endl;
+  cout << "\t--------" << endl;
+  cout << "1. Reverse cipher" << endl;
+  cout << "2. Caesar cipher" << endl;
+  cout << "3. ROT13 cipher" << endl;
+  cout << "4. ROT_X cipher" << endl;
+  cout << "5. Vigenere cipher" << endl;
+  cout << "6. Exit" << endl;
+  cout << "\nPick an option: ";
+}
+
+void menu_encode_decode() {
+  cout << "1. Encode" << endl;
+  cout << "2. Decode" << endl;
+  cout << "3. Exit" << endl;
+  cout << "Pick an option: ";
+}
 
 int main() {
   int option_1, option_2;
 
   system("clear");
+
   do {
-    cout << "\t--------" << endl;
-    cout << "\t| MENU |" << endl;
-    cout << "\t--------" << endl;
-    cout << "1. Reverse cipher" << endl;
-    cout << "2. Caesar cipher" << endl;
-    cout << "3. ROT13 cipher" << endl;
-    cout << "4. ROT_X cipher" << endl;
-    cout << "5. Vigenere cipher" << endl;
-    cout << "6. Exit" << endl;
-    cout << "\nPick an option: ";
+    menu_cipher();
     cin >> option_1;
 
     switch (option_1) {
     case 1:
       system("clear");
+
       do {
         cout << "\t------------------" << endl;
         cout << "\t| Reverse cipher |" << endl;
         cout << "\t------------------" << endl;
-        cout << "1. Encrypt" << endl;
-        cout << "2. Decrypt" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Pick an option: ";
+        menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          encrypt_reverse();
+          reverse_encode(plainText);
           break;
         case 2:
-          decrypt_reverse();
+          reverse_decode(cipherText);
           break;
         }
       } while (option_2 != 3);
@@ -52,18 +58,15 @@ int main() {
         cout << "\t-----------------" << endl;
         cout << "\t| Caesar cipher |" << endl;
         cout << "\t-----------------" << endl;
-        cout << "1. Encrypt" << endl;
-        cout << "2. Decrypt" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Pick an option: ";
+        menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          encrypt_caesar();
+          caesar_encode(plainText, CAESAR_KEY);
           break;
         case 2:
-          decrypt_caesar();
+          caesar_decode(cipherText, CAESAR_KEY);
           break;
         }
       } while (option_2 != 3);
@@ -76,18 +79,15 @@ int main() {
         cout << "\t----------------" << endl;
         cout << "\t| ROT13 cipher |" << endl;
         cout << "\t----------------" << endl;
-        cout << "1. Encrypt" << endl;
-        cout << "2. Decrypt" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Pick an option: ";
+        menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          encrypt_ROT13();
+          ROT13_encode(plainText, ROT13_KEY);
           break;
         case 2:
-          decrypt_ROT13();
+          ROT13_decode(plainText, ROT13_KEY);
           break;
         }
       } while (option_2 != 3);
@@ -100,18 +100,15 @@ int main() {
         cout << "\t----------------" << endl;
         cout << "\t| ROT_X cipher |" << endl;
         cout << "\t----------------" << endl;
-        cout << "1. Encrypt" << endl;
-        cout << "2. Decrypt" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Pick an option: ";
+        menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          encrypt_ROT_X();
+          ROT_X_encode(plainText, key);
           break;
         case 2:
-          decrypt_ROT_X();
+          ROT_X_decode(plainText, key);
           break;
         }
       } while (option_2 != 3);
@@ -124,18 +121,15 @@ int main() {
         cout << "\t-------------------" << endl;
         cout << "\t| Vigenere cipher |" << endl;
         cout << "\t-------------------" << endl;
-        cout << "1. Encrypt" << endl;
-        cout << "2. Decrypt" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Pick an option: ";
+        menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          encrypt_vigenere();
+          vigenere_encode(plainText, key);
           break;
         case 2:
-          decrypt_vigenere();
+          vigenere_decode(plainText, key);
           break;
         }
       } while (option_2 != 3);
@@ -146,6 +140,5 @@ int main() {
   } while (option_1 != 6);
 
   cout << "\n\n";
-  // system("pause");
   return 0;
 }
