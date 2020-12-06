@@ -22,15 +22,15 @@ You can see all I want to do inside the project by checking the [TODO.md] file.
 git clone https://github.com/hugoogb/cryptography-cpp.git
 ```
 
-- 2. Run make in the cloned directory
+- 2. Run make inside the cloned directory
 
 ```sh
 make
 ```
 
-If you want to clean the directory (executable and .o): ```make clean```
+If you want to clean the directory (executable and .o files): `make clean`
 
-- 3. Execute the main binary created
+- 3. Execute the binary created
 
 ```sh
 ./main
