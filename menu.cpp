@@ -9,7 +9,8 @@ void menu_methods() {
   cout << "2. Alphabets" << endl;
   cout << "3. Ciphers" << endl;
   cout << "4. Encoding" << endl;
-  cout << "5. Exit" << endl;
+  cout << "5. Messages history" << endl;
+  cout << "6. Exit" << endl;
   cout << "\nPick an option: ";
 }
 
