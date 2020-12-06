@@ -1,32 +1,11 @@
 #include "functions.h"
-
-// Show cipher menu: pick cipher method
-void menu_cipher() {
-  cout << "\t--------" << endl;
-  cout << "\t| MENU |" << endl;
-  cout << "\t--------" << endl;
-  cout << "1. Reverse cipher" << endl;
-  cout << "2. Caesar cipher" << endl;
-  cout << "3. ROT13 cipher" << endl;
-  cout << "4. ROT_X cipher" << endl;
-  cout << "5. Vigenere cipher" << endl;
-  cout << "6. Exit" << endl;
-  cout << "\nPick an option: ";
-}
-
-// Show inside menu: pick encode or decode
-void menu_encode_decode() {
-  cout << "1. Encode" << endl;
-  cout << "2. Decode" << endl;
-  cout << "3. Exit" << endl;
-  cout << "Pick an option: ";
-}
+#include "menu.h"
 
 int main() {
   int num_messages = 1, index = 0;
   TMessage message[num_messages];
 
-  int option_1, option_2;
+  int option_1, option_2, option_3;
   string method;
 
   string vigenere_fullKey;
@@ -34,10 +13,31 @@ int main() {
   system("clear");
 
   do {
-    menu_cipher();
+    menu_methods();
     cin >> option_1;
 
     switch (option_1) {
+    case 1:
+
+      break;
+    case 2:
+
+      break;
+    case 3:
+
+      break;
+    case 4:
+
+      break;
+    }
+
+  } while (option_1 != 5);
+
+  do {
+    menu_cipher();
+    cin >> option_2;
+
+    switch (option_2) {
     case 1:
       system("clear");
 
@@ -48,9 +48,9 @@ int main() {
         cout << "\t| Reverse transformation|" << endl;
         cout << "\t-------------------------" << endl;
         menu_encode_decode();
-        cin >> option_2;
+        cin >> option_3;
 
-        switch (option_2) {
+        switch (option_3) {
         case 1:
           initialize_messages(message, num_messages, index);
 
@@ -76,7 +76,7 @@ int main() {
 
           break;
         }
-      } while (option_2 != 3);
+      } while (option_3 != 3);
       system("clear");
       break;
 
@@ -90,9 +90,9 @@ int main() {
         cout << "\t| Caesar cipher |" << endl;
         cout << "\t-----------------" << endl;
         menu_encode_decode();
-        cin >> option_2;
+        cin >> option_3;
 
-        switch (option_2) {
+        switch (option_3) {
         case 1:
           initialize_messages(message, num_messages, index);
 
@@ -122,7 +122,7 @@ int main() {
 
           break;
         }
-      } while (option_2 != 3);
+      } while (option_3 != 3);
       system("clear");
       break;
 
@@ -136,9 +136,9 @@ int main() {
         cout << "\t| ROT13 cipher |" << endl;
         cout << "\t----------------" << endl;
         menu_encode_decode();
-        cin >> option_2;
+        cin >> option_3;
 
-        switch (option_2) {
+        switch (option_3) {
         case 1:
           initialize_messages(message, num_messages, index);
 
@@ -168,7 +168,7 @@ int main() {
 
           break;
         }
-      } while (option_2 != 3);
+      } while (option_3 != 3);
       system("clear");
       break;
 
@@ -182,9 +182,9 @@ int main() {
         cout << "\t| ROT_X cipher |" << endl;
         cout << "\t----------------" << endl;
         menu_encode_decode();
-        cin >> option_2;
+        cin >> option_3;
 
-        switch (option_2) {
+        switch (option_3) {
         case 1:
           initialize_messages(message, num_messages, index);
 
@@ -216,7 +216,7 @@ int main() {
 
           break;
         }
-      } while (option_2 != 3);
+      } while (option_3 != 3);
       system("clear");
       break;
 
@@ -230,9 +230,9 @@ int main() {
         cout << "\t| Vigenère cipher |" << endl;
         cout << "\t-------------------" << endl;
         menu_encode_decode();
-        cin >> option_2;
+        cin >> option_3;
 
-        switch (option_2) {
+        switch (option_3) {
         case 1:
           initialize_messages(message, num_messages, index);
 
@@ -270,12 +270,11 @@ int main() {
 
           break;
         }
-      } while (option_2 != 3);
+      } while (option_3 != 3);
       system("clear");
       break;
     }
-
-  } while (option_1 != 6);
+  } while (option_2 != 5);
 
   return 0;
 }
