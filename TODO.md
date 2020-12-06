@@ -2,11 +2,29 @@
 
 - Fix encrypting general issues --> ✅
 - Fix decrypting general issues --> ✅
-- Add (fix it) Vigenere cipher --> ✅
-- Add more cipher methods  ⬇
-    - Ideas --> ❌
-    - Go --> ❌
-    - Here --> ❌
+- Add more methods ⬇
+  - Transform ⬇
+    - Reverse --> ✅
+    - Lower case --> ❌
+    - Upper case --> ❌
+    - Capitalize --> ❌
+    - Inverse case --> ❌
+  - Alphabet ⬇
+    - Mourse --> ❌
+  - Cipher ⬇
+    - Caesar --> ✅
+    - ROT13 --> ✅
+    - ROTX --> ✅
+    - Vigenère --> ✅
+  - Encoding ⬇
+    - Base32 --> ❌
+    - Base64 --> ❌
+    - Ascii85 --> ❌
+    - Decimal --> ❌
+    - Hexadecimal --> ❌
+    - Binary --> ❌
+    - Octal --> ❌
+    - URL --> ❌
 - Search and think about using string instead of char[] --> ✅
 - Implement structs to save messages, both original and encrypted --> ✅
 - Add an option to see the messages history of all the messages done in that session --> ❌

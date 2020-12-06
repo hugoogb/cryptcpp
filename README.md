@@ -14,7 +14,7 @@ You can see all I want to do inside the project by checking the [TODO.md] file.
 - G++ Compiler
 - GNU make
 
-## Intalling
+## Installing
 
 - 1. Clone the repo
 
