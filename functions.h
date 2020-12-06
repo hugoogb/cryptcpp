@@ -7,6 +7,26 @@ using namespace std;
 #define CAESAR_KEY 3
 #define ROT13_KEY 13
 
+typedef struct {
+  string method;
+  string plainText;
+  string cipherText;
+  int keyNumber;
+  string keyChar;
+} TMessage;
+
+// Initialize the messages
+void initialize_messages(TMessage message[], int num_messages, int actual_index);
+
+// Void function: Asks for the plain text to encode
+void plainText_get(TMessage message[], int actual_index);
+// Void function: Asks for the cipher text to decode
+void cipherText_get(TMessage message[], int actual_index);
+// Void function: Asks for the numeric key
+void numberKey_get(TMessage message[], int actual_index);
+// Void function: Asks for the alfabetic key
+void charKey_get(TMessage message[], int actual_index);
+
 // Function: reverse transformation encode
 string reverse_encode(string plainText);
 // Function: reverse transformaton decode

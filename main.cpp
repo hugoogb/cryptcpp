@@ -1,5 +1,6 @@
 #include "functions.h"
 
+// Show cipher menu: pick cipher method
 void menu_cipher() {
   cout << "\t--------" << endl;
   cout << "\t| MENU |" << endl;
@@ -13,6 +14,7 @@ void menu_cipher() {
   cout << "\nPick an option: ";
 }
 
+// Show inside menu: pick encode or decode
 void menu_encode_decode() {
   cout << "1. Encode" << endl;
   cout << "2. Decode" << endl;
@@ -21,7 +23,13 @@ void menu_encode_decode() {
 }
 
 int main() {
+  int num_messages = 1, index = 0;
+  TMessage message[num_messages];
+
   int option_1, option_2;
+  string method;
+
+  string vigenere_fullKey;
 
   system("clear");
 
@@ -33,19 +41,39 @@ int main() {
     case 1:
       system("clear");
 
+      method = "Transform --> Reverse";
+
       do {
-        cout << "\t------------------" << endl;
-        cout << "\t| Reverse cipher |" << endl;
-        cout << "\t------------------" << endl;
+        cout << "\t-------------------------" << endl;
+        cout << "\t| Reverse transformation|" << endl;
+        cout << "\t-------------------------" << endl;
         menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          reverse_encode(plainText);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+
+          plainText_get(message, index);
+          message[index].cipherText = reverse_encode(message[index].plainText);
+
+          num_messages++;
+          index++;
+
           break;
         case 2:
-          reverse_decode(cipherText);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+
+          cipherText_get(message, index);
+          message[index].plainText = reverse_decode(message[index].cipherText);
+
+          num_messages++;
+          index++;
+
           break;
         }
       } while (option_2 != 3);
@@ -54,6 +82,9 @@ int main() {
 
     case 2:
       system("clear");
+
+      method = "Cipher --> Caesar";
+
       do {
         cout << "\t-----------------" << endl;
         cout << "\t| Caesar cipher |" << endl;
@@ -63,10 +94,32 @@ int main() {
 
         switch (option_2) {
         case 1:
-          caesar_encode(plainText, CAESAR_KEY);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+          message[index].keyNumber = 3;
+
+          plainText_get(message, index);
+          message[index].cipherText =
+              caesar_encode(message[index].plainText, CAESAR_KEY);
+
+          num_messages++;
+          index++;
+
           break;
         case 2:
-          caesar_decode(cipherText, CAESAR_KEY);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+          message[index].keyNumber = 3;
+
+          cipherText_get(message, index);
+          message[index].plainText =
+              caesar_decode(message[index].cipherText, CAESAR_KEY);
+
+          num_messages++;
+          index++;
+
           break;
         }
       } while (option_2 != 3);
@@ -75,6 +128,9 @@ int main() {
 
     case 3:
       system("clear");
+
+      method = "Cipher --> ROT13";
+
       do {
         cout << "\t----------------" << endl;
         cout << "\t| ROT13 cipher |" << endl;
@@ -84,10 +140,32 @@ int main() {
 
         switch (option_2) {
         case 1:
-          ROT13_encode(plainText, ROT13_KEY);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+          message[index].keyNumber = 13;
+
+          plainText_get(message, index);
+          message[index].cipherText =
+              ROT13_encode(message[index].plainText, ROT13_KEY);
+
+          num_messages++;
+          index++;
+
           break;
         case 2:
-          ROT13_decode(plainText, ROT13_KEY);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+          message[index].keyNumber = 13;
+
+          cipherText_get(message, index);
+          message[index].plainText =
+              ROT13_decode(message[index].cipherText, ROT13_KEY);
+
+          num_messages++;
+          index++;
+
           break;
         }
       } while (option_2 != 3);
@@ -96,6 +174,9 @@ int main() {
 
     case 4:
       system("clear");
+
+      method = "Cipher --> ROT_X";
+
       do {
         cout << "\t----------------" << endl;
         cout << "\t| ROT_X cipher |" << endl;
@@ -105,10 +186,34 @@ int main() {
 
         switch (option_2) {
         case 1:
-          ROT_X_encode(plainText, key);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+
+          numberKey_get(message, index);
+
+          plainText_get(message, index);
+          message[index].cipherText =
+              ROT_X_encode(message[index].plainText, message[index].keyNumber);
+
+          num_messages++;
+          index++;
+
           break;
         case 2:
-          ROT_X_decode(plainText, key);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+
+          numberKey_get(message, index);
+
+          cipherText_get(message, index);
+          message[index].plainText =
+              ROT_X_decode(message[index].cipherText, message[index].keyNumber);
+
+          num_messages++;
+          index++;
+
           break;
         }
       } while (option_2 != 3);
@@ -117,19 +222,52 @@ int main() {
 
     case 5:
       system("clear");
+
+      method = "Cipher --> Vigenère";
+
       do {
         cout << "\t-------------------" << endl;
-        cout << "\t| Vigenere cipher |" << endl;
+        cout << "\t| Vigenère cipher |" << endl;
         cout << "\t-------------------" << endl;
         menu_encode_decode();
         cin >> option_2;
 
         switch (option_2) {
         case 1:
-          vigenere_encode(plainText, key);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+
+          charKey_get(message, index);
+
+          plainText_get(message, index);
+          vigenere_fullKey = vigenere_key_gen(message[index].plainText,
+                                              message[index].keyChar);
+
+          message[index].cipherText =
+              vigenere_encode(message[index].plainText, vigenere_fullKey);
+
+          num_messages++;
+          index++;
+
           break;
         case 2:
-          vigenere_decode(plainText, key);
+          initialize_messages(message, num_messages, index);
+
+          message[index].method = method;
+
+          charKey_get(message, index);
+
+          cipherText_get(message, index);
+          vigenere_fullKey = vigenere_key_gen(message[index].cipherText,
+                                              message[index].keyChar);
+
+          message[index].plainText =
+              vigenere_decode(message[index].cipherText, vigenere_fullKey);
+
+          num_messages++;
+          index++;
+
           break;
         }
       } while (option_2 != 3);
@@ -139,6 +277,5 @@ int main() {
 
   } while (option_1 != 6);
 
-  cout << "\n\n";
   return 0;
 }

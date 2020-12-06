@@ -1,5 +1,41 @@
 #include "functions.h"
 
+// Void function: initializes message struct with some predefined values
+void initialize_messages(TMessage message[], int num_messages,
+                         int actual_index) {
+  for (int i = actual_index; i < num_messages; i++) {
+    message[i].method = "-----";
+    message[i].plainText = "-----";
+    message[i].cipherText = "-----";
+    message[i].keyNumber = 0;
+    message[i].keyChar = "-----";
+  }
+}
+
+// Void function: Asks for the plain text to encode
+void plainText_get(TMessage message[], int actual_index) {
+  cout << "Type the text to encode: ";
+  getline(cin, message[actual_index].plainText);
+}
+
+// Void function: Asks for the cipher text to decode
+void cipherText_get(TMessage message[], int actual_index) {
+  cout << "Type the text to decode: ";
+  getline(cin, message[actual_index].cipherText);
+}
+
+// Void function: Asks for the numeric key
+void numberKey_get(TMessage message[], int actual_index) {
+  cout << "Type the number key: ";
+  cin >> message[actual_index].keyNumber;
+}
+
+// Void function: Asks for the alfabetic key
+void charKey_get(TMessage message[], int actual_index) {
+  cout << "Type the alfabetic key: ";
+  getline(cin, message[actual_index].keyChar);
+}
+
 // Function: reverse transformation encode
 string reverse_encode(string plainText) {
   string cipherText;
@@ -25,7 +61,7 @@ string caesar_encode(string plainText, int key) {
   string cipherText;
   char ch;
 
-  for (int i = 0; i < plainText.length(); i++) {
+  for (size_t i = 0; i < plainText.length(); i++) {
 
     // Encrypt Uppercase chars
     if (isupper(plainText[i])) {
@@ -48,7 +84,7 @@ string caesar_decode(string cipherText, int key) {
   string plainText;
   char ch;
 
-  for (int i = 0; i < cipherText.length(); i++) {
+  for (size_t i = 0; i < cipherText.length(); i++) {
 
     // Decrypt Uppercase chars
     if (isupper(cipherText[i])) {
@@ -71,7 +107,7 @@ string ROT13_encode(string plainText, int key) {
   string cipherText;
   char ch;
 
-  for (int i = 0; i < plainText.length(); i++) {
+  for (size_t i = 0; i < plainText.length(); i++) {
 
     // Encrypt Uppercase chars
     if (isupper(plainText[i])) {
@@ -94,7 +130,7 @@ string ROT13_decode(string cipherText, int key) {
   string plainText;
   char ch;
 
-  for (int i = 0; i < cipherText.length(); i++) {
+  for (size_t i = 0; i < cipherText.length(); i++) {
 
     // Encrypt Uppercase chars
     if (isupper(cipherText[i])) {
@@ -117,7 +153,7 @@ string ROT_X_encode(string plainText, int key) {
   string cipherText;
   char ch;
 
-  for (int i = 0; i < plainText.length(); i++) {
+  for (size_t i = 0; i < plainText.length(); i++) {
 
     // Encrypt Uppercase chars
     if (isupper(plainText[i])) {
@@ -140,7 +176,7 @@ string ROT_X_decode(string cipherText, int key) {
   string plainText;
   char ch;
 
-  for (int i = 0; i < cipherText.length(); i++) {
+  for (size_t i = 0; i < cipherText.length(); i++) {
 
     // Decrypt Uppercase chars
     if (isupper(cipherText[i])) {
@@ -180,7 +216,7 @@ string vigenere_encode(string plainText, string key) {
 
   fullKey = vigenere_key_gen(plainText, key);
 
-  for (int i = 0; i < plainText.length(); i++) {
+  for (size_t i = 0; i < plainText.length(); i++) {
     // Encrypt Uppercase chars
     if (isupper(plainText[i])) {
       ch = (plainText[i] + fullKey[i]) % 26 + 'A';
@@ -204,7 +240,7 @@ string vigenere_decode(string cipherText, string key) {
 
   fullKey = vigenere_key_gen(plainText, key);
 
-  for (int i = 0; i < cipherText.length(); i++) {
+  for (size_t i = 0; i < cipherText.length(); i++) {
     // Decrypt Uppercase chars
     if (isupper(cipherText[i])) {
       ch = (cipherText[i] - fullKey[i] + 26) % 26 + 'A';
