@@ -2,9 +2,9 @@
 
 // Show methods menu: pick the general method to use
 void menu_methods() {
-  cout << "\t------------------";
-  cout << "\t| MENU - Methods |";
-  cout << "\t------------------";
+  cout << "\t-----------------" << endl;
+  cout << "\t| MENU - Method |" << endl;
+  cout << "\t-----------------" << endl;
   cout << "1. Transform" << endl;
   cout << "2. Alphabets" << endl;
   cout << "3. Ciphers" << endl;
@@ -16,9 +16,9 @@ void menu_methods() {
 
 // Show transform methods menu: pick transform methods
 void menu_transform() {
-  cout << "\t-----------------------" << endl;
-  cout << "\t| Methods - Transform |" << endl;
-  cout << "\t-----------------------" << endl;
+  cout << "\t----------------------" << endl;
+  cout << "\t| Method - Transform |" << endl;
+  cout << "\t----------------------" << endl;
   cout << "1. Reverse transform" << endl;
   cout << "2. Lower case transform" << endl;
   cout << "3. Upper case transform" << endl;
@@ -30,9 +30,9 @@ void menu_transform() {
 
 // Show alphabets methods menu: pick alphabets methods
 void menu_alphabets() {
-  cout << "\t-----------------------" << endl;
-  cout << "\t| Methods - Alphabets |" << endl;
-  cout << "\t-----------------------" << endl;
+  cout << "\t---------------------" << endl;
+  cout << "\t| Method - Alphabet |" << endl;
+  cout << "\t---------------------" << endl;
   cout << "1. Mourse code alphabet" << endl;
   cout << "2. Exit" << endl;
   cout << "\nPick an option: ";
@@ -40,9 +40,9 @@ void menu_alphabets() {
 
 // Show cipher methods menu: pick cipher method
 void menu_cipher() {
-  cout << "\t--------------------" << endl;
-  cout << "\t| Methods - Cipher |" << endl;
-  cout << "\t--------------------" << endl;
+  cout << "\t-------------------" << endl;
+  cout << "\t| Method - Cipher |" << endl;
+  cout << "\t-------------------" << endl;
   cout << "1. Caesar cipher" << endl;
   cout << "2. ROT13 cipher" << endl;
   cout << "3. ROT_X cipher" << endl;
@@ -53,9 +53,9 @@ void menu_cipher() {
 
 // Show encoding methods menu: pick encoding method
 void menu_encoding() {
-  cout << "\t----------------------" << endl;
-  cout << "\t| Methods - Encoding |" << endl;
-  cout << "\t----------------------" << endl;
+  cout << "\t---------------------" << endl;
+  cout << "\t| Method - Encoding |" << endl;
+  cout << "\t---------------------" << endl;
   cout << "1. Base32 encoding" << endl;
   cout << "2. Base64 encoding" << endl;
   cout << "3. Ascii85 encoding" << endl;

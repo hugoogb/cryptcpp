@@ -11,9 +11,9 @@ int main() {
 
   string vigenere_fullKey;
 
-  system("clear");
-
   do {
+    system("clear");
+
     menu_methods();
     cin >> option_1;
 
@@ -34,9 +34,9 @@ int main() {
           method += "Reverse";
 
           do {
-            cout << "\t-------------------------" << endl;
-            cout << "\t| Reverse transformation|" << endl;
-            cout << "\t-------------------------" << endl;
+            cout << "\t-----------------------" << endl;
+            cout << "\t| Transform - Reverse |" << endl;
+            cout << "\t-----------------------" << endl;
             menu_encode_decode();
             cin >> option_3;
 
@@ -72,16 +72,16 @@ int main() {
           system("clear");
           break;
         case 2:
-
+          // Lower case transform goes here
           break;
         case 3:
-
+          // Upper case transform goes here
           break;
         case 4:
-
+          // Capitalize transform goes here
           break;
         case 5:
-
+          // Invers case transform goes here
           break;
         }
 
@@ -124,9 +124,9 @@ int main() {
           method += "Caesar";
 
           do {
-            cout << "\t-----------------" << endl;
-            cout << "\t| Caesar cipher |" << endl;
-            cout << "\t-----------------" << endl;
+            cout << "\t-------------------" << endl;
+            cout << "\t| Cipher - Caesar |" << endl;
+            cout << "\t-------------------" << endl;
             menu_encode_decode();
             cin >> option_3;
 
@@ -170,9 +170,9 @@ int main() {
           method += "ROT13";
 
           do {
-            cout << "\t----------------" << endl;
-            cout << "\t| ROT13 cipher |" << endl;
-            cout << "\t----------------" << endl;
+            cout << "\t------------------" << endl;
+            cout << "\t| Cipher - ROT13 |" << endl;
+            cout << "\t------------------" << endl;
             menu_encode_decode();
             cin >> option_3;
 
@@ -215,9 +215,9 @@ int main() {
           method += "ROT_X";
 
           do {
-            cout << "\t----------------" << endl;
-            cout << "\t| ROT_X cipher |" << endl;
-            cout << "\t----------------" << endl;
+            cout << "\t------------------" << endl;
+            cout << "\t| Cipher - ROT_X |" << endl;
+            cout << "\t------------------" << endl;
             menu_encode_decode();
             cin >> option_3;
 
@@ -262,9 +262,9 @@ int main() {
           method += "Vigenère";
 
           do {
-            cout << "\t-------------------" << endl;
-            cout << "\t| Vigenère cipher |" << endl;
-            cout << "\t-------------------" << endl;
+            cout << "\t---------------------" << endl;
+            cout << "\t| Cipher - Vigenère |" << endl;
+            cout << "\t---------------------" << endl;
             menu_encode_decode();
             cin >> option_3;
 
