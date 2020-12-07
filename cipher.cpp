@@ -1,27 +1,7 @@
-#include "functions.h"
+#include "cipher.h"
 
-// Function: reverse transformation encode
-string reverse_encode(string plainText) {
-  string cipherText;
-
-  reverse(plainText.begin(), plainText.end());
-  cipherText = plainText;
-
-  return cipherText;
-}
-
-// Function: reverse transformaton decode
-string reverse_decode(string cipherText) {
-  string plainText;
-
-  reverse(cipherText.begin(), cipherText.end());
-  plainText = cipherText;
-
-  return plainText;
-}
-
-// Function: Caesar cipher encode
-string caesar_encode(string plainText, int key) {
+// Function: Caesar cipher encrypt
+string caesar_encrypt(string plainText, int key) {
   string cipherText;
   char ch;
 
@@ -43,8 +23,8 @@ string caesar_encode(string plainText, int key) {
   return cipherText;
 }
 
-// Function: Caesar cipher decode
-string caesar_decode(string cipherText, int key) {
+// Function: Caesar cipher decrypt
+string caesar_decrypt(string cipherText, int key) {
   string plainText;
   char ch;
 
@@ -66,8 +46,8 @@ string caesar_decode(string cipherText, int key) {
   return plainText;
 }
 
-// Function: ROT13 cipher encode
-string ROT13_encode(string plainText, int key) {
+// Function: ROT13 cipher encrypt
+string ROT13_encrypt(string plainText, int key) {
   string cipherText;
   char ch;
 
@@ -89,8 +69,8 @@ string ROT13_encode(string plainText, int key) {
   return cipherText;
 }
 
-// Function: ROT13 cipher decode
-string ROT13_decode(string cipherText, int key) {
+// Function: ROT13 cipher decrypt
+string ROT13_decrypt(string cipherText, int key) {
   string plainText;
   char ch;
 
@@ -112,8 +92,8 @@ string ROT13_decode(string cipherText, int key) {
   return plainText;
 }
 
-// Function: ROT_X (you type the numeric key that you want) cipher encode
-string ROT_X_encode(string plainText, int key) {
+// Function: ROT_X (you type the numeric key that you want) cipher encrypt
+string ROT_X_encrypt(string plainText, int key) {
   string cipherText;
   char ch;
 
@@ -135,8 +115,8 @@ string ROT_X_encode(string plainText, int key) {
   return cipherText;
 }
 
-// Function: ROT_X (you type the numeric key that you want) cipher decode
-string ROT_X_decode(string cipherText, int key) {
+// Function: ROT_X (you type the numeric key that you want) cipher decrypt
+string ROT_X_decrypt(string cipherText, int key) {
   string plainText;
   char ch;
 
@@ -173,8 +153,8 @@ string vigenere_key_gen(string str, string key) {
   return key;
 }
 
-// Function: Vigenère cipher encode
-string vigenere_encode(string plainText, string key) {
+// Function: Vigenère cipher encrypt
+string vigenere_encrypt(string plainText, string key) {
   string cipher_text, fullKey;
   char ch;
 
@@ -197,8 +177,8 @@ string vigenere_encode(string plainText, string key) {
   return cipher_text;
 }
 
-// Function: Vigenère cipher decode
-string vigenere_decode(string cipherText, string key) {
+// Function: Vigenère cipher decrypt
+string vigenere_decrypt(string cipherText, string key) {
   string plainText, fullKey;
   char ch;
 

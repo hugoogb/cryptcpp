@@ -17,5 +17,5 @@ void menu_cipher();
 // Show encoding methods menu: pick encoding method
 void menu_encoding();
 
-// Show inside menu: pick encode or decode
-void menu_encode_decode();
+// Show inside menu: pick encrypt or decrypt
+void menu_encrypt_decrypt();
