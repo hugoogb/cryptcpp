@@ -1,6 +1,9 @@
-#include "functions.h"
+#include "alphabet.h"
+#include "cipher.h"
+#include "encoding.h"
 #include "menu.h"
 #include "struct.h"
+#include "transform.h"
 
 int main() {
   int num_messages = 1, index = 0;
@@ -37,7 +40,7 @@ int main() {
             cout << "\t-----------------------" << endl;
             cout << "\t| Transform - Reverse |" << endl;
             cout << "\t-----------------------" << endl;
-            menu_encode_decode();
+            menu_encrypt_decrypt();
             cin >> option_3;
 
             switch (option_3) {
@@ -48,7 +51,10 @@ int main() {
 
               plainText_get(message, index);
               message[index].cipherText =
-                  reverse_encode(message[index].plainText);
+                  reverse_encrypt(message[index].plainText);
+
+              cout << "\n--> Encrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -61,7 +67,10 @@ int main() {
 
               cipherText_get(message, index);
               message[index].plainText =
-                  reverse_decode(message[index].cipherText);
+                  reverse_decrypt(message[index].cipherText);
+
+              cout << "\n--> Decrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -127,7 +136,7 @@ int main() {
             cout << "\t-------------------" << endl;
             cout << "\t| Cipher - Caesar |" << endl;
             cout << "\t-------------------" << endl;
-            menu_encode_decode();
+            menu_encrypt_decrypt();
             cin >> option_3;
 
             switch (option_3) {
@@ -139,7 +148,10 @@ int main() {
 
               plainText_get(message, index);
               message[index].cipherText =
-                  caesar_encode(message[index].plainText, CAESAR_KEY);
+                  caesar_encrypt(message[index].plainText, CAESAR_KEY);
+
+              cout << "\n--> Encrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -153,7 +165,10 @@ int main() {
 
               cipherText_get(message, index);
               message[index].plainText =
-                  caesar_decode(message[index].cipherText, CAESAR_KEY);
+                  caesar_decrypt(message[index].cipherText, CAESAR_KEY);
+
+              cout << "\n--> Decrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -173,7 +188,7 @@ int main() {
             cout << "\t------------------" << endl;
             cout << "\t| Cipher - ROT13 |" << endl;
             cout << "\t------------------" << endl;
-            menu_encode_decode();
+            menu_encrypt_decrypt();
             cin >> option_3;
 
             switch (option_3) {
@@ -185,7 +200,10 @@ int main() {
 
               plainText_get(message, index);
               message[index].cipherText =
-                  ROT13_encode(message[index].plainText, ROT13_KEY);
+                  ROT13_encrypt(message[index].plainText, ROT13_KEY);
+
+              cout << "\n--> Encrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -199,7 +217,10 @@ int main() {
 
               cipherText_get(message, index);
               message[index].plainText =
-                  ROT13_decode(message[index].cipherText, ROT13_KEY);
+                  ROT13_decrypt(message[index].cipherText, ROT13_KEY);
+
+              cout << "\n--> Decrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -218,7 +239,7 @@ int main() {
             cout << "\t------------------" << endl;
             cout << "\t| Cipher - ROT_X |" << endl;
             cout << "\t------------------" << endl;
-            menu_encode_decode();
+            menu_encrypt_decrypt();
             cin >> option_3;
 
             switch (option_3) {
@@ -230,8 +251,11 @@ int main() {
               numberKey_get(message, index);
 
               plainText_get(message, index);
-              message[index].cipherText = ROT_X_encode(
+              message[index].cipherText = ROT_X_encrypt(
                   message[index].plainText, message[index].keyNumber);
+
+              cout << "\n--> Encrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -245,8 +269,11 @@ int main() {
               numberKey_get(message, index);
 
               cipherText_get(message, index);
-              message[index].plainText = ROT_X_decode(message[index].cipherText,
-                                                      message[index].keyNumber);
+              message[index].plainText = ROT_X_decrypt(
+                  message[index].cipherText, message[index].keyNumber);
+
+              cout << "\n--> Decrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -265,7 +292,7 @@ int main() {
             cout << "\t---------------------" << endl;
             cout << "\t| Cipher - Vigenère |" << endl;
             cout << "\t---------------------" << endl;
-            menu_encode_decode();
+            menu_encrypt_decrypt();
             cin >> option_3;
 
             switch (option_3) {
@@ -281,7 +308,10 @@ int main() {
                                                   message[index].keyChar);
 
               message[index].cipherText =
-                  vigenere_encode(message[index].plainText, vigenere_fullKey);
+                  vigenere_encrypt(message[index].plainText, vigenere_fullKey);
+
+              cout << "\n--> Encrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;
@@ -299,7 +329,10 @@ int main() {
                                                   message[index].keyChar);
 
               message[index].plainText =
-                  vigenere_decode(message[index].cipherText, vigenere_fullKey);
+                  vigenere_decrypt(message[index].cipherText, vigenere_fullKey);
+
+              cout << "\n--> Decrypted text: " << message[index].cipherText
+                   << endl;
 
               num_messages++;
               index++;

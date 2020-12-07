@@ -68,10 +68,10 @@ void menu_encoding() {
   cout << "\nPick an option: ";
 }
 
-// Show inside menu: pick encode or decode
-void menu_encode_decode() {
-  cout << "1. Encode" << endl;
-  cout << "2. Decode" << endl;
+// Show inside menu: pick encrypt or decrypt
+void menu_encrypt_decrypt() {
+  cout << "1. Encrypt" << endl;
+  cout << "2. Decrypt" << endl;
   cout << "3. Exit" << endl;
   cout << "\nPick an option: ";
 }
