@@ -5,7 +5,7 @@ CFLAGS=-Wall
 main: main.o menu.o struct.o transform.o alphabet.o cipher.o encoding.o
 	$(CC) $(CFLAGS) main.o menu.o struct.o transform.o alphabet.o cipher.o encoding.o -o main
 
-main.o: main.cpp functions.h menu.h struct.h
+main.o: main.cpp menu.h struct.h transform.h alphabet.h cipher.h encoding.h
 	$(CC) $(CFLAGS) -c main.cpp -o main.o
 
 transform.o: transform.cpp transform.h

@@ -18,14 +18,14 @@ void initialize_messages(TMessage message[], int num_messages,
 
 // Void function: Asks for the plain text to encode
 void plainText_get(TMessage message[], int actual_index) {
-  cout << "Type the text to encode: ";
+  cout << "Type the text to encrypt: ";
   cin.ignore();
   getline(cin, message[actual_index].plainText);
 }
 
 // Void function: Asks for the cipher text to decode
 void cipherText_get(TMessage message[], int actual_index) {
-  cout << "Type the text to decode: ";
+  cout << "Type the text to decrypt: ";
   cin.ignore();
   getline(cin, message[actual_index].cipherText);
 }
