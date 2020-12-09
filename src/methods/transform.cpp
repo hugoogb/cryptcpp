@@ -1,4 +1,4 @@
-#include "transform.h"
+#include "../../include/methods/transform.h"
 
 // Function: reverse transform encrypt
 string reverse_encrypt(string plainText) {

@@ -1,34 +1,61 @@
-SHELL=/bin/bash
+CXX      := -g++
+CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror
+LDFLAGS  := -L/usr/lib -lstdc++ -lm
+BUILD    := ./build
+OBJ_DIR  := $(BUILD)/objects
+APP_DIR  := $(BUILD)/apps
+TARGET   := program
+INCLUDE  := -Iinclude/
+SRC      :=                      \
+   $(wildcard src/util/*.cpp) \
+   $(wildcard src/methods/*.cpp) \
+   $(wildcard src/*.cpp)         \
 
-CC=g++
-CFLAGS=-Wall
+OBJECTS  := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+DEPENDENCIES \
+         := $(OBJECTS:.o=.d)
 
-METHODS_PATH=src/methods/
-UTIL_PATH=src/util/
+.DEFAULT_GOAL := help
 
-main: main.o menu.o struct.o transform.o alphabet.o cipher.o encoding.o
-	$(CC) $(CFLAGS) main.o menu.o struct.o transform.o alphabet.o cipher.o encoding.o -o main
+install: build $(APP_DIR)/$(TARGET)
 
-main.o: main.cpp $(UTIL_PATH)menu.h $(UTIL_PATH)struct.h $(METHODS_PATH)transform.h $(METHODS_PATH)alphabet.h $(METHODS_PATH)cipher.h $(METHODS_PATH)encoding.h
-	$(CC) $(CFLAGS) -I $(METHODS_PATH) -I $(UTIL_PATH) -c main.cpp -o main.o
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -MMD -o $@
 
-transform.o: $(METHODS_PATH)transform.cpp $(METHODS_PATH)transform.h
-	$(CC) $(CFLAGS) -I $(METHODS_PATH) -c $(METHODS_PATH)transform.cpp -o transform.o
+$(APP_DIR)/$(TARGET): $(OBJECTS)
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -o $(APP_DIR)/$(TARGET) $^ $(LDFLAGS)
 
-alphabet.o: $(METHODS_PATH)alphabet.cpp $(METHODS_PATH)alphabet.h
-	$(CC) $(CFLAGS) -I $(METHODS_PATH) -c $(METHODS_PATH)alphabet.cpp -o alphabet.o
+-include $(DEPENDENCIES)
 
-cipher.o: $(METHODS_PATH)cipher.cpp $(METHODS_PATH)cipher.h
-	$(CC) $(CFLAGS) -I $(METHODS_PATH) -c $(METHODS_PATH)cipher.cpp -o cipher.o
+.PHONY: install build debug release info help clean
 
-encoding.o: $(METHODS_PATH)encoding.cpp $(METHODS_PATH)encoding.h
-	$(CC) $(CFLAGS) -I $(METHODS_PATH) -c $(METHODS_PATH)encoding.cpp -o encoding.o
+build:
+	@mkdir -pv $(APP_DIR)
+	@mkdir -pv $(OBJ_DIR)
 
-menu.o: $(UTIL_PATH)menu.cpp $(UTIL_PATH)menu.h
-	$(CC) $(CFLAGS) -I $(UTIL_PATH) -c $(UTIL_PATH)menu.cpp -o menu.o
+debug: CXXFLAGS += -DDEBUG -g
+debug: install
 
-struct.o: $(UTIL_PATH)struct.cpp $(UTIL_PATH)struct.h
-	$(CC) $(CFLAGS) -I $(UTIL_PATH) -c $(UTIL_PATH)struct.cpp -o struct.o
+release: CXXFLAGS += -O2
+release: install
+
+info:
+	@echo "[*] Application dir: ${APP_DIR}     "
+	@echo "[*] Object dir:      ${OBJ_DIR}     "
+	@echo "[*] Sources:         ${SRC}         "
+	@echo "[*] Objects:         ${OBJECTS}     "
+	@echo "[*] Dependencies:    ${DEPENDENCIES}"
+
+help:
+	@echo "[*] Avaliable commands: "
+	@echo " - make install --> build dir, object files and executables"
+	@echo " - make build --> creates build directories needed"
+	@echo " - make debug --> install adding -DDEBUG and -g compile flags"
+	@echo " - make release --> install adding -O2 compile flag"
+	@echo " - make info --> show project build info"
+	@echo " - make clean --> removes all the object files and executables built"
 
 clean:
-	rm -f main *.o
+	-@rm -rvf $(BUILD)

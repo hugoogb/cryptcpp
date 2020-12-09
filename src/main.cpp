@@ -1,9 +1,9 @@
-#include "src/methods/alphabet.h"
-#include "src/methods/cipher.h"
-#include "src/methods/encoding.h"
-#include "src/methods/transform.h"
-#include "src/util/menu.h"
-#include "src/util/struct.h"
+#include "../include/methods/alphabet.h"
+#include "../include/methods/cipher.h"
+#include "../include/methods/encoding.h"
+#include "../include/methods/transform.h"
+#include "../include/util/menu.h"
+#include "../include/util/struct.h"
 
 int main() {
   int num_messages = 1, index = 0;
