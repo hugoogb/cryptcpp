@@ -8,13 +8,18 @@ string caesar_encrypt(string plainText, int key) {
   for (size_t i = 0; i < plainText.length(); i++) {
 
     // Encrypt Uppercase chars
-    if (isupper(plainText[i])) {
+    if ((plainText[i] >= 'A') && (plainText[i] <= 'Z')) {
       ch = (plainText[i] + key - 'A') % 26 + 'A';
     }
 
     // Encrypt Lowercase chars
-    else if (islower(plainText[i])) {
+    else if ((plainText[i] >= 'a') && (plainText[i] <= 'z')) {
       ch = (plainText[i] + key - 'a') % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     cipherText.push_back(ch);
@@ -31,13 +36,18 @@ string caesar_decrypt(string cipherText, int key) {
   for (size_t i = 0; i < cipherText.length(); i++) {
 
     // Decrypt Uppercase chars
-    if (isupper(cipherText[i])) {
+    if ((cipherText[i] >= 'A') && (cipherText[i] <= 'Z')) {
       ch = (cipherText[i] - key - 'A') % 26 + 'A';
     }
 
     // Decrypt Lowercase chars
-    else if (islower(cipherText[i])) {
+    else if ((cipherText[i] >= 'a') && (cipherText[i] <= 'z')) {
       ch = (cipherText[i] - key - 'a') % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     plainText.push_back(ch);
@@ -54,13 +64,18 @@ string ROT13_encrypt(string plainText, int key) {
   for (size_t i = 0; i < plainText.length(); i++) {
 
     // Encrypt Uppercase chars
-    if (isupper(plainText[i])) {
+    if ((plainText[i] >= 'A') && (plainText[i] <= 'Z')) {
       ch = (plainText[i] + key - 'A') % 26 + 'A';
     }
 
     // Encrypt Lowercase chars
-    else if (islower(plainText[i])) {
+    else if ((plainText[i] >= 'a') && (plainText[i] <= 'z')) {
       ch = (plainText[i] + key - 'a') % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     cipherText.push_back(ch);
@@ -77,13 +92,18 @@ string ROT13_decrypt(string cipherText, int key) {
   for (size_t i = 0; i < cipherText.length(); i++) {
 
     // Encrypt Uppercase chars
-    if (isupper(cipherText[i])) {
+    if ((cipherText[i] >= 'A') && (cipherText[i] <= 'Z')) {
       ch = (cipherText[i] - key - 'A') % 26 + 'A';
     }
 
     // Encrypt Lowercase chars
-    else if (islower(cipherText[i])) {
+    else if ((cipherText[i] >= 'a') && (cipherText[i] <= 'z')) {
       ch = (cipherText[i] - key - 'a') % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     plainText.push_back(ch);
@@ -100,13 +120,18 @@ string ROT_X_encrypt(string plainText, int key) {
   for (size_t i = 0; i < plainText.length(); i++) {
 
     // Encrypt Uppercase chars
-    if (isupper(plainText[i])) {
+    if ((plainText[i] >= 'A') && (plainText[i] <= 'Z')) {
       ch = (plainText[i] + key - 'A') % 26 + 'A';
     }
 
     // Encrypt Lowercase chars
-    else if (islower(plainText[i])) {
+    else if ((plainText[i] >= 'a') && (plainText[i] <= 'z')) {
       ch = (plainText[i] + key - 'a') % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     cipherText.push_back(ch);
@@ -123,13 +148,18 @@ string ROT_X_decrypt(string cipherText, int key) {
   for (size_t i = 0; i < cipherText.length(); i++) {
 
     // Decrypt Uppercase chars
-    if (isupper(cipherText[i])) {
+    if ((cipherText[i] >= 'A') && (cipherText[i] <= 'Z')) {
       ch = (cipherText[i] - key - 'A') % 26 + 'A';
     }
 
     // Decrypt Lowercase chars
-    else if (islower(cipherText[i])) {
+    else if ((cipherText[i] >= 'a') && (cipherText[i] <= 'z')) {
       ch = (cipherText[i] - key - 'a') % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     plainText.push_back(ch);
@@ -162,13 +192,18 @@ string vigenere_encrypt(string plainText, string key) {
 
   for (size_t i = 0; i < plainText.length(); i++) {
     // Encrypt Uppercase chars
-    if (isupper(plainText[i])) {
+    if ((plainText[i] >= 'A') && (plainText[i] <= 'Z')) {
       ch = (plainText[i] + fullKey[i]) % 26 + 'A';
     }
 
     // Encrypt Lowercase chars
-    else if (islower(plainText[i])) {
+    else if ((plainText[i] >= 'a') && (plainText[i] <= 'z')) {
       ch = (plainText[i] + fullKey[i]) % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     cipher_text.push_back(ch);
@@ -186,13 +221,18 @@ string vigenere_decrypt(string cipherText, string key) {
 
   for (size_t i = 0; i < cipherText.length(); i++) {
     // Decrypt Uppercase chars
-    if (isupper(cipherText[i])) {
+    if ((cipherText[i] >= 'A') && (cipherText[i] <= 'Z')) {
       ch = (cipherText[i] - fullKey[i] + 26) % 26 + 'A';
     }
 
     // Decrypt Lowercase chars
-    else if (islower(cipherText[i])) {
+    else if ((cipherText[i] >= 'a') && (cipherText[i] <= 'z')) {
       ch = (cipherText[i] - fullKey[i] + 26) % 26 + 'a';
+    }
+
+    // No change if not either Uppercase or Lowercase
+    else {
+      ch = plainText[i];
     }
 
     plainText.push_back(ch);

@@ -22,3 +22,8 @@ void cipherText_get(TMessage message[], int actual_index);
 void numberKey_get(TMessage message[], int actual_index);
 // Void function: Asks for the alfabetic key
 void charKey_get(TMessage message[], int actual_index);
+
+// Void function: Show encrypted text
+void show_encrypted(TMessage message[], int actual_index);
+// Void function: Show decrypted text
+void show_decrypted(TMessage message[], int actual_index);
