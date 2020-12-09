@@ -7,7 +7,7 @@
 
 int main() {
   int num_messages = 1, index = 0;
-  TMessage message[num_messages];
+  TMessage message[100];
 
   int option_1, option_2, option_3;
   string method;
@@ -53,8 +53,7 @@ int main() {
               message[index].cipherText =
                   reverse_encrypt(message[index].plainText);
 
-              cout << "\n--> Encrypted text: " << message[index].cipherText
-                   << endl;
+              show_encrypted(message, index);
 
               num_messages++;
               index++;
@@ -69,8 +68,7 @@ int main() {
               message[index].plainText =
                   reverse_decrypt(message[index].cipherText);
 
-              cout << "\n--> Decrypted text: " << message[index].cipherText
-                   << endl;
+              show_decrypted(message, index);
 
               num_messages++;
               index++;
@@ -150,8 +148,7 @@ int main() {
               message[index].cipherText =
                   caesar_encrypt(message[index].plainText, CAESAR_KEY);
 
-              cout << "\n--> Encrypted text: " << message[index].cipherText
-                   << endl;
+              show_encrypted(message, index);
 
               num_messages++;
               index++;
@@ -167,8 +164,7 @@ int main() {
               message[index].plainText =
                   caesar_decrypt(message[index].cipherText, CAESAR_KEY);
 
-              cout << "\n--> Decrypted text: " << message[index].cipherText
-                   << endl;
+              show_decrypted(message, index);
 
               num_messages++;
               index++;
@@ -202,8 +198,7 @@ int main() {
               message[index].cipherText =
                   ROT13_encrypt(message[index].plainText, ROT13_KEY);
 
-              cout << "\n--> Encrypted text: " << message[index].cipherText
-                   << endl;
+              show_encrypted(message, index);
 
               num_messages++;
               index++;
@@ -219,8 +214,7 @@ int main() {
               message[index].plainText =
                   ROT13_decrypt(message[index].cipherText, ROT13_KEY);
 
-              cout << "\n--> Decrypted text: " << message[index].cipherText
-                   << endl;
+              show_decrypted(message, index);
 
               num_messages++;
               index++;
@@ -254,8 +248,7 @@ int main() {
               message[index].cipherText = ROT_X_encrypt(
                   message[index].plainText, message[index].keyNumber);
 
-              cout << "\n--> Encrypted text: " << message[index].cipherText
-                   << endl;
+              show_encrypted(message, index);
 
               num_messages++;
               index++;
@@ -272,8 +265,7 @@ int main() {
               message[index].plainText = ROT_X_decrypt(
                   message[index].cipherText, message[index].keyNumber);
 
-              cout << "\n--> Decrypted text: " << message[index].cipherText
-                   << endl;
+              show_decrypted(message, index);
 
               num_messages++;
               index++;
@@ -304,14 +296,11 @@ int main() {
               charKey_get(message, index);
 
               plainText_get(message, index);
-              vigenere_fullKey = vigenere_key_gen(message[index].plainText,
-                                                  message[index].keyChar);
 
-              message[index].cipherText =
-                  vigenere_encrypt(message[index].plainText, vigenere_fullKey);
+              message[index].cipherText = vigenere_encrypt(
+                  message[index].plainText, message[index].keyChar);
 
-              cout << "\n--> Encrypted text: " << message[index].cipherText
-                   << endl;
+              show_encrypted(message, index);
 
               num_messages++;
               index++;
@@ -325,14 +314,11 @@ int main() {
               charKey_get(message, index);
 
               cipherText_get(message, index);
-              vigenere_fullKey = vigenere_key_gen(message[index].cipherText,
-                                                  message[index].keyChar);
 
-              message[index].plainText =
-                  vigenere_decrypt(message[index].cipherText, vigenere_fullKey);
+              message[index].plainText = vigenere_decrypt(
+                  message[index].cipherText, message[index].keyChar);
 
-              cout << "\n--> Decrypted text: " << message[index].cipherText
-                   << endl;
+              show_decrypted(message, index);
 
               num_messages++;
               index++;
@@ -344,6 +330,8 @@ int main() {
           break;
         }
       } while (option_2 != 5);
+
+      break;
     case 4:
       system("clear");
 
