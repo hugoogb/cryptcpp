@@ -25,15 +25,15 @@ git clone https://github.com/hugoogb/cryptography-cpp.git
 - 2. Run make inside the cloned directory
 
 ```sh
-make
+make install
 ```
 
-If you want to clean the directory (executable and .o files): `make clean`
+Open help menu: `make help` or `make`
 
 - 3. Execute the binary created
 
 ```sh
-./main
+./build/apps/program
 ```
 
 ## You're all set up and ready to start encrypting ;) !!!
