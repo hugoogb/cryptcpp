@@ -10,7 +10,7 @@ main: main.o menu.o struct.o transform.o alphabet.o cipher.o encoding.o
 	$(CC) $(CFLAGS) main.o menu.o struct.o transform.o alphabet.o cipher.o encoding.o -o main
 
 main.o: main.cpp $(UTIL_PATH)menu.h $(UTIL_PATH)struct.h $(METHODS_PATH)transform.h $(METHODS_PATH)alphabet.h $(METHODS_PATH)cipher.h $(METHODS_PATH)encoding.h
-	$(CC) $(CFLAGS) -I $(METHODS_PATH) $(UTIL_PATH) -c main.cpp -o main.o
+	$(CC) $(CFLAGS) -I $(METHODS_PATH) -I $(UTIL_PATH) -c main.cpp -o main.o
 
 transform.o: $(METHODS_PATH)transform.cpp $(METHODS_PATH)transform.h
 	$(CC) $(CFLAGS) -I $(METHODS_PATH) -c $(METHODS_PATH)transform.cpp -o transform.o
