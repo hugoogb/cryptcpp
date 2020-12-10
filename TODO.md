@@ -30,4 +30,5 @@
 - Add an option to see the messages history of all the messages done in that session --> ❌
 - Save the messages history in a text file --> ❌
 - Add makefile --> ✅
+- Add CMake with Catch2 integration (testing) --> ❌
 - Add tests (unit testing ?) --> ❌
