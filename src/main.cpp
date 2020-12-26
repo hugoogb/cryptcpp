@@ -79,16 +79,192 @@ int main() {
           system("clear");
           break;
         case 2:
-          // Lower case transform goes here
+          system("clear");
+
+          method += "Lower case";
+
+          do {
+            cout << "\t--------------------------" << endl;
+            cout << "\t| Transform - Lower case |" << endl;
+            cout << "\t--------------------------" << endl;
+            menu_encrypt_decrypt();
+            cin >> option_3;
+
+            switch (option_3) {
+            case 1:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              plainText_get(message, index);
+              message[index].cipherText =
+                  lowerCase_encrypt(message[index].plainText);
+
+              show_encrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            case 2:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              cipherText_get(message, index);
+              message[index].plainText =
+                  lowerCase_decrypt(message[index].cipherText);
+
+              show_decrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            }
+          } while (option_3 != 3);
+          system("clear");
           break;
         case 3:
-          // Upper case transform goes here
+          system("clear");
+
+          method += "Upper case";
+
+          do {
+            cout << "\t--------------------------" << endl;
+            cout << "\t| Transform - Upper case |" << endl;
+            cout << "\t--------------------------" << endl;
+            menu_encrypt_decrypt();
+            cin >> option_3;
+
+            switch (option_3) {
+            case 1:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              plainText_get(message, index);
+              message[index].cipherText =
+                  upperCase_encrypt(message[index].plainText);
+
+              show_encrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            case 2:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              cipherText_get(message, index);
+              message[index].plainText =
+                  upperCase_decrypt(message[index].cipherText);
+
+              show_decrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            }
+          } while (option_3 != 3);
+          system("clear");
           break;
         case 4:
-          // Capitalize transform goes here
+          system("clear");
+
+          method += "Capitalize";
+
+          do {
+            cout << "\t--------------------------" << endl;
+            cout << "\t| Transform - Capitalize |" << endl;
+            cout << "\t--------------------------" << endl;
+            menu_encrypt_decrypt();
+            cin >> option_3;
+
+            switch (option_3) {
+            case 1:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              plainText_get(message, index);
+              message[index].cipherText =
+                  capitalize_encrypt(message[index].plainText);
+
+              show_encrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            case 2:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              cipherText_get(message, index);
+              message[index].plainText =
+                  capitalize_decrypt(message[index].cipherText);
+
+              show_decrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            }
+          } while (option_3 != 3);
+          system("clear");
           break;
         case 5:
-          // Invers case transform goes here
+          system("clear");
+
+          method += "Inverse case";
+
+          do {
+            cout << "\t----------------------------" << endl;
+            cout << "\t| Transform - Inverse case |" << endl;
+            cout << "\t----------------------------" << endl;
+            menu_encrypt_decrypt();
+            cin >> option_3;
+
+            switch (option_3) {
+            case 1:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              plainText_get(message, index);
+              message[index].cipherText =
+                  inverseCase_encrypt(message[index].plainText);
+
+              show_encrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            case 2:
+              initialize_messages(message, num_messages, index);
+
+              message[index].method = method;
+
+              cipherText_get(message, index);
+              message[index].plainText =
+                  inverseCase_decrypt(message[index].cipherText);
+
+              show_decrypted(message, index);
+
+              num_messages++;
+              index++;
+
+              break;
+            }
+          } while (option_3 != 3);
+          system("clear");
           break;
         }
 

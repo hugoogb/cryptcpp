@@ -51,6 +51,6 @@ void show_encrypted(TMessage message[], int actual_index) {
 
 // Void function: Show decrypted text
 void show_decrypted(TMessage message[], int actual_index) {
-  cout << "\n--> Decrypted text: " << message[actual_index].cipherText << endl
+  cout << "\n--> Decrypted text: " << message[actual_index].plainText<< endl
        << endl;
 }
