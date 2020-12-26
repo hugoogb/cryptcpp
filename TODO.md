@@ -1,14 +1,12 @@
-# TODO 🔜
+# TODO
 
-- Fix encrypting general issues --> ✅
-- Fix decrypting general issues --> ❌
-- Add more methods ⬇
+- Methods ⬇
   - Transform ⬇
     - Reverse --> ✅
-    - Lower case --> ❌
-    - Upper case --> ❌
-    - Capitalize --> ❌
-    - Inverse case --> ❌
+    - Lower case --> ✅
+    - Upper case --> ✅
+    - Capitalize --> ✅
+    - Inverse case --> ✅
   - Alphabet ⬇
     - Mourse --> ❌
   - Cipher ⬇
@@ -30,5 +28,6 @@
 - Add an option to see the messages history of all the messages done in that session --> ❌
 - Save the messages history in a text file --> ❌
 - Add makefile --> ✅
-- Add CMake with Catch2 integration (testing) --> ❌
 - Add tests (unit testing ?) --> ❌
+- Add CMake with Catch2 integration (testing) --> ❌
+- Refactor main.cpp to be more readable --> ❌
