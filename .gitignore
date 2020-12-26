@@ -1,6 +1,9 @@
-*
-!/**/
-!*.*
-*.o
-build/
+/*
+!README.md
+!TODO.md
+!.gitignore
+
+!.github
+!include
+!src
 !makefile
