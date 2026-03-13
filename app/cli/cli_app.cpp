@@ -1,5 +1,6 @@
 #include "cli_app.h"
 #include "menu.h"
+#include "terminal.h"
 
 #include "cryptcpp/cipher/rotation_cipher.h"
 #include "cryptcpp/cipher/vigenere_cipher.h"
@@ -51,8 +52,7 @@ void CliApp::run_submenu(const std::string &title,
   int choice = 0;
   int back = static_cast<int>(items.size());
   do {
-    show_menu(title, items);
-    choice = read_menu_choice(back);
+    choice = select_menu(title, items);
     if (choice >= 1 && choice < back) {
       clear_screen();
       items[static_cast<std::size_t>(choice - 1)].action();
@@ -66,8 +66,7 @@ void CliApp::run_method_loop(const std::string &banner,
                              const std::string &key_display) {
   int option = 0;
   do {
-    menu_encrypt_decrypt(banner);
-    option = read_menu_choice(3);
+    option = select_encrypt_decrypt(banner);
 
     if (option == 1 || option == 2) {
       bool encrypting = (option == 1);
@@ -133,12 +132,10 @@ void CliApp::show_history() {
     cout << "    Cipher: " << truncate(r.cipher_text) << endl;
   }
   cout << endl;
-  cout << "1. Clear history" << endl;
-  cout << "2. Back" << endl;
-  cout << " - Pick an option: ";
 
-  int choice = read_menu_choice(2);
-  if (choice == 1) {
+  std::vector<std::string> labels = {"Clear history", "Back"};
+  int idx = interactive_select("History Options", labels);
+  if (idx == 0) {
     store_.clear();
     cout << " - History cleared." << endl << endl;
     cout << "Press Enter to continue...";
@@ -433,8 +430,7 @@ void CliApp::run() {
         {"Exit", []() {}},
     };
 
-    show_menu("MENU - Method", main_items);
-    option = read_menu_choice(static_cast<int>(main_items.size()));
+    option = select_menu("MENU - Method", main_items);
     if (option >= 1 &&
         option < static_cast<int>(main_items.size())) {
       main_items[static_cast<std::size_t>(option - 1)].action();

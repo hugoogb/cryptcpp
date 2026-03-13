@@ -1,8 +1,8 @@
 #pragma once
 
+#include "terminal.h"
+
 #include <functional>
-#include <iostream>
-#include <limits>
 #include <string>
 #include <utility>
 #include <vector>
@@ -14,9 +14,13 @@ struct MenuItem {
   std::function<void()> action;
 };
 
-void show_menu(const std::string &title, const std::vector<MenuItem> &items);
-int read_menu_choice(int max);
+// Interactive menu selection. Returns 1-indexed choice.
+int select_menu(const std::string &title, const std::vector<MenuItem> &items);
+
+// Interactive encrypt/decrypt selection. Returns 1=Encrypt, 2=Decrypt, 3=Back.
+int select_encrypt_decrypt(const std::string &banner);
+
+// Read an integer from stdin (cooked mode).
 std::pair<int, bool> read_integer();
-void menu_encrypt_decrypt(const std::string &banner);
 
 } // namespace cryptcpp::cli

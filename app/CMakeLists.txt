@@ -1,5 +1,6 @@
 add_executable(cryptcpp
   main.cpp
+  cli/terminal.cpp
   cli/menu.cpp
   cli/cli_app.cpp
 )
