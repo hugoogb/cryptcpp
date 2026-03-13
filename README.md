@@ -1,41 +1,38 @@
-# Cryptography in C++
+# cryptcpp
 
-## Introduction
+A C++ CLI tool for encrypting and decrypting text using various methods.
 
-This program writed in C++ is used to encrypt and decrypt messages with different methods.
+## Features
 
-I did it for a high school project and now that in studying software engineering I'm trying to improve the whole program.
-
-Right now it's so simple, I know, but I will be upgrading it as soon as I can.
-You can see all I want to do inside the project by checking the [TODO.md] file.
+- **Ciphers**: Caesar, ROT13, ROT_X (custom shift), Vigenere
+- **Transforms**: Reverse, Lowercase, Uppercase, Capitalize, Inverse case
+- **Encodings**: Base32, Base64, Ascii85, Decimal, Hexadecimal, Binary, Octal, URL
+- **Message history**: View all encrypt/decrypt operations from the current session
 
 ## Prerequisites
 
-- G++ Compiler
-- GNU make
+- CMake 3.16+
+- C++17 compiler (GCC, Clang)
 
-## Installing
-
-- 1. Clone the repo
+## Building
 
 ```sh
-git clone https://github.com/hugoogb/cryptography-cpp.git
+git clone https://github.com/hugoogb/cryptcpp.git
+cd cryptcpp
+cmake -B build
+cmake --build build
 ```
 
-- 2. Run make inside the cloned directory
+## Running
 
 ```sh
-make install
+./build/app/cryptcpp
 ```
 
-Open help menu: `make help` or `make`
-
-- 3. Execute the binary created
+## Testing
 
 ```sh
-./build/apps/program
+cmake -B build -DBUILD_TESTS=ON
+cmake --build build
+cd build && ctest --output-on-failure
 ```
-
-## You're all set up and ready to start encrypting ;) !!!
-
-[TODO.md]: https://github.com/hugoogb/cryptography-cpp/blob/master/TODO.md
