@@ -3,12 +3,14 @@
 #include "cryptcpp/message_store.h"
 #include "cryptcpp/method.h"
 #include <string>
+#include <vector>
 
 namespace cryptcpp::cli {
 
 class CliApp {
 public:
   void run();
+  int run_oneshot(int argc, char *argv[]);
 
 private:
   void show_history();

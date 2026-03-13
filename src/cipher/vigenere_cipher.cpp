@@ -1,8 +1,19 @@
 #include "cryptcpp/cipher/vigenere_cipher.h"
+#include <algorithm>
+#include <cctype>
+#include <stdexcept>
 
 namespace cryptcpp {
 
-VigenereCipher::VigenereCipher(std::string key) : key_(std::move(key)) {}
+VigenereCipher::VigenereCipher(std::string key) : key_(std::move(key)) {
+  if (key_.empty())
+    throw std::invalid_argument("Vigenere key cannot be empty");
+  bool all_alpha = std::all_of(
+      key_.begin(), key_.end(),
+      [](char c) { return std::isalpha(static_cast<unsigned char>(c)); });
+  if (!all_alpha)
+    throw std::invalid_argument("Vigenere key must contain only letters");
+}
 
 std::string VigenereCipher::expand_key(std::string_view text) const {
   std::string expanded;

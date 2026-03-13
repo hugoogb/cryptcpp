@@ -17,8 +17,14 @@ std::string Decimal::encrypt(std::string_view input) const {
 std::string Decimal::decrypt(std::string_view input) const {
   std::string result;
   std::istringstream stream{std::string(input)};
-  int val;
-  while (stream >> val) {
+  std::string token;
+  while (stream >> token) {
+    int val;
+    try {
+      val = std::stoi(token);
+    } catch (const std::exception &) {
+      throw std::invalid_argument("Invalid decimal value");
+    }
     if (val < 0 || val > 255)
       throw std::invalid_argument("Invalid decimal value");
     result += static_cast<char>(val);

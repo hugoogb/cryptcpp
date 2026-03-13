@@ -189,3 +189,25 @@ TEST_CASE("Ascii85 invalid character throws", "[encoding][error]") {
   // Characters outside 33-117 range (excluding delimiters)
   CHECK_THROWS_AS(a.decrypt("<~\x01~>"), std::invalid_argument);
 }
+
+TEST_CASE("Hexadecimal lowercase decode", "[encoding]") {
+  Hexadecimal h;
+  CHECK(h.decrypt("4a4b") == "JK");
+  CHECK(h.decrypt("48656c6c6f") == "Hello");
+}
+
+TEST_CASE("Octal out-of-range value throws", "[encoding][error]") {
+  Octal o;
+  // 777 octal = 511 decimal > 255
+  CHECK_THROWS_AS(o.decrypt("777"), std::invalid_argument);
+}
+
+TEST_CASE("Decimal huge number throws", "[encoding][error]") {
+  Decimal d;
+  CHECK_THROWS_AS(d.decrypt("99999999999"), std::invalid_argument);
+}
+
+TEST_CASE("Decimal out-of-range value throws", "[encoding][error]") {
+  Decimal d;
+  CHECK_THROWS_AS(d.decrypt("256"), std::invalid_argument);
+}

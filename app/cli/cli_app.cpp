@@ -20,7 +20,8 @@
 #include <algorithm>
 #include <cctype>
 #include <iostream>
-#include <limits>
+#include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -145,6 +146,140 @@ void CliApp::show_history() {
   }
 }
 
+static std::string to_lower(std::string s) {
+  std::transform(s.begin(), s.end(), s.begin(),
+                 [](unsigned char c) { return std::tolower(c); });
+  return s;
+}
+
+static void print_usage(const char *prog) {
+  std::cerr << "Usage: " << prog
+            << " <encrypt|decrypt> <method> [key] [text]" << endl;
+  std::cerr << endl;
+  std::cerr << "Methods:" << endl;
+  std::cerr << "  Ciphers:    caesar, rot13, rot <N>, vigenere <KEY>"
+            << endl;
+  std::cerr << "  Transforms: reverse, lowercase, uppercase, capitalize, "
+               "inversecase"
+            << endl;
+  std::cerr << "  Encodings:  base32, base64, ascii85, decimal, hex, "
+               "binary, octal, url"
+            << endl;
+  std::cerr << endl;
+  std::cerr << "If text is omitted, reads from stdin." << endl;
+}
+
+int CliApp::run_oneshot(int argc, char *argv[]) {
+  if (argc < 3) {
+    print_usage(argv[0]);
+    return 1;
+  }
+
+  std::string op = to_lower(argv[1]);
+  std::string method_name = to_lower(argv[2]);
+
+  bool encrypting;
+  if (op == "encrypt")
+    encrypting = true;
+  else if (op == "decrypt")
+    encrypting = false;
+  else {
+    std::cerr << "Error: operation must be 'encrypt' or 'decrypt'" << endl;
+    return 1;
+  }
+
+  // Build method and figure out which arg is the text
+  std::unique_ptr<ICryptMethod> method;
+  int text_arg_index = 3; // index of the text argument in argv
+
+  try {
+    if (method_name == "caesar") {
+      method = std::make_unique<RotationCipher>(RotationCipher::caesar());
+    } else if (method_name == "rot13") {
+      method = std::make_unique<RotationCipher>(RotationCipher::rot13());
+    } else if (method_name == "rot") {
+      if (argc < 4) {
+        std::cerr << "Error: 'rot' requires a shift number" << endl;
+        return 1;
+      }
+      int shift;
+      try {
+        shift = std::stoi(argv[3]);
+      } catch (const std::exception &) {
+        std::cerr << "Error: invalid shift number '" << argv[3] << "'"
+                  << endl;
+        return 1;
+      }
+      method = std::make_unique<RotationCipher>(shift);
+      text_arg_index = 4;
+    } else if (method_name == "vigenere") {
+      if (argc < 4) {
+        std::cerr << "Error: 'vigenere' requires a key" << endl;
+        return 1;
+      }
+      method = std::make_unique<VigenereCipher>(argv[3]);
+      text_arg_index = 4;
+    } else if (method_name == "reverse") {
+      method = std::make_unique<Reverse>();
+    } else if (method_name == "lowercase") {
+      method = std::make_unique<Lowercase>();
+    } else if (method_name == "uppercase") {
+      method = std::make_unique<Uppercase>();
+    } else if (method_name == "capitalize") {
+      method = std::make_unique<Capitalize>();
+    } else if (method_name == "inversecase") {
+      method = std::make_unique<InverseCase>();
+    } else if (method_name == "base32") {
+      method = std::make_unique<Base32>();
+    } else if (method_name == "base64") {
+      method = std::make_unique<Base64>();
+    } else if (method_name == "ascii85") {
+      method = std::make_unique<Ascii85>();
+    } else if (method_name == "decimal") {
+      method = std::make_unique<Decimal>();
+    } else if (method_name == "hex" || method_name == "hexadecimal") {
+      method = std::make_unique<Hexadecimal>();
+    } else if (method_name == "binary") {
+      method = std::make_unique<Binary>();
+    } else if (method_name == "octal") {
+      method = std::make_unique<Octal>();
+    } else if (method_name == "url") {
+      method = std::make_unique<Url>();
+    } else {
+      std::cerr << "Error: unknown method '" << argv[2] << "'" << endl;
+      return 1;
+    }
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Error: " << e.what() << endl;
+    return 1;
+  }
+
+  // Get input text: from argv or stdin
+  std::string input;
+  if (text_arg_index < argc) {
+    input = argv[text_arg_index];
+  } else {
+    std::ostringstream oss;
+    oss << cin.rdbuf();
+    input = oss.str();
+    // Strip trailing newline from piped input
+    if (!input.empty() && input.back() == '\n')
+      input.pop_back();
+  }
+
+  // Run
+  std::string output;
+  try {
+    output = encrypting ? method->encrypt(input) : method->decrypt(input);
+  } catch (const std::exception &e) {
+    std::cerr << "Error: " << e.what() << endl;
+    return 1;
+  }
+
+  cout << output << endl;
+  return 0;
+}
+
 void CliApp::run() {
   // --- Transform submenu items ---
   auto make_transform_items = [this]() {
@@ -195,12 +330,9 @@ void CliApp::run() {
         {"ROT_X",
          [this]() {
            cout << " - Enter rotation key (integer): ";
-           int shift = read_menu_choice(
-               std::numeric_limits<int>::max()); // reuse for int read
-           if (shift < 0) {
-             // read_menu_choice already printed error
+           auto [shift, ok] = read_integer();
+           if (!ok)
              return;
-           }
            RotationCipher m(shift);
            run_method_loop(
                "--- ROT" + std::to_string(shift) + " ---", m,
@@ -209,19 +341,12 @@ void CliApp::run() {
         {"Vigenere",
          [this]() {
            std::string key = read_text(" - Enter Vigenere key: ");
-           if (key.empty()) {
-             cout << " - Key cannot be empty." << endl << endl;
-             return;
+           try {
+             VigenereCipher m(key);
+             run_method_loop("--- Vigenere ---", m, key);
+           } catch (const std::invalid_argument &e) {
+             cout << " - Error: " << e.what() << endl << endl;
            }
-           bool all_alpha = std::all_of(
-               key.begin(), key.end(),
-               [](char c) { return std::isalpha(static_cast<unsigned char>(c)); });
-           if (!all_alpha) {
-             cout << " - Key must contain only letters." << endl << endl;
-             return;
-           }
-           VigenereCipher m(key);
-           run_method_loop("--- Vigenere ---", m, key);
          }},
         {"Back", []() {}},
     };

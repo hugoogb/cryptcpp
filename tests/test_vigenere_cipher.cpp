@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include <stdexcept>
 #include "cryptcpp/cipher/vigenere_cipher.h"
 
 using cryptcpp::VigenereCipher;
@@ -61,4 +62,19 @@ TEST_CASE("Vigenere name", "[vigenere]") {
 TEST_CASE("Vigenere key accessor", "[vigenere]") {
   VigenereCipher v("MYKEY");
   CHECK(v.key() == "MYKEY");
+}
+
+TEST_CASE("Vigenere empty key throws", "[vigenere][error]") {
+  CHECK_THROWS_AS(VigenereCipher(""), std::invalid_argument);
+}
+
+TEST_CASE("Vigenere non-alpha key throws", "[vigenere][error]") {
+  CHECK_THROWS_AS(VigenereCipher("KEY1"), std::invalid_argument);
+  CHECK_THROWS_AS(VigenereCipher("K E Y"), std::invalid_argument);
+}
+
+TEST_CASE("Vigenere single char key", "[vigenere]") {
+  VigenereCipher v("B");
+  CHECK(v.encrypt("AAA") == "BBB");
+  CHECK(v.decrypt("BBB") == "AAA");
 }

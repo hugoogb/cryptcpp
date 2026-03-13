@@ -23,7 +23,12 @@ std::string Octal::decrypt(std::string_view input) const {
   std::istringstream stream{std::string(input)};
   std::string token;
   while (stream >> token) {
-    int val = std::stoi(token, nullptr, 8);
+    int val;
+    try {
+      val = std::stoi(token, nullptr, 8);
+    } catch (const std::exception &) {
+      throw std::invalid_argument("Invalid octal value");
+    }
     if (val < 0 || val > 255)
       throw std::invalid_argument("Invalid octal value");
     result += static_cast<char>(val);

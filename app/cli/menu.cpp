@@ -36,6 +36,18 @@ int read_menu_choice(int max) {
   return val;
 }
 
+std::pair<int, bool> read_integer() {
+  int val;
+  if (!(cin >> val)) {
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << " - Invalid input, try again." << endl << endl;
+    return {0, false};
+  }
+  cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  return {val, true};
+}
+
 void menu_encrypt_decrypt(const std::string &banner) {
   cout << "\t" << banner << endl;
   cout << "1. Encrypt" << endl;

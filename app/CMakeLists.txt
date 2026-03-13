@@ -13,3 +13,5 @@ target_include_directories(cryptcpp PRIVATE
 target_compile_options(cryptcpp PRIVATE
   -Wall -Wextra -Wpedantic
 )
+
+install(TARGETS cryptcpp DESTINATION bin)

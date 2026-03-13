@@ -24,3 +24,5 @@ target_include_directories(cryptcpp_lib PUBLIC
 target_compile_options(cryptcpp_lib PRIVATE
   -Wall -Wextra -Wpedantic
 )
+
+install(TARGETS cryptcpp_lib DESTINATION lib)

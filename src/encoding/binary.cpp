@@ -22,7 +22,12 @@ std::string Binary::decrypt(std::string_view input) const {
   while (stream >> token) {
     if (token.size() != 8)
       throw std::invalid_argument("Invalid binary byte");
-    int val = std::stoi(token, nullptr, 2);
+    int val;
+    try {
+      val = std::stoi(token, nullptr, 2);
+    } catch (const std::exception &) {
+      throw std::invalid_argument("Invalid binary byte");
+    }
     result += static_cast<char>(val);
   }
   return result;
