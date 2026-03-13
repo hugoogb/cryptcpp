@@ -1,62 +1,39 @@
 #include "menu.h"
-#include <iostream>
 
 namespace cryptcpp::cli {
 
+using std::cin;
 using std::cout;
 using std::endl;
 
-void menu_methods() {
-  cout << "\t-----------------" << endl;
-  cout << "\t| MENU - Method |" << endl;
-  cout << "\t-----------------" << endl;
-  cout << "1. Transform" << endl;
-  cout << "2. Ciphers" << endl;
-  cout << "3. Encoding" << endl;
-  cout << "4. Messages history" << endl;
-  cout << "5. Exit" << endl;
+void show_menu(const std::string &title, const std::vector<MenuItem> &items) {
+  // Build title bar
+  std::string bar(title.size() + 4, '-');
+  cout << "\t" << bar << endl;
+  cout << "\t| " << title << " |" << endl;
+  cout << "\t" << bar << endl;
+
+  for (std::size_t i = 0; i < items.size(); ++i) {
+    cout << (i + 1) << ". " << items[i].label << endl;
+  }
   cout << " - Pick an option: ";
 }
 
-void menu_transform() {
-  cout << "\t----------------------" << endl;
-  cout << "\t| Method - Transform |" << endl;
-  cout << "\t----------------------" << endl;
-  cout << "1. Reverse" << endl;
-  cout << "2. Lowercase" << endl;
-  cout << "3. Uppercase" << endl;
-  cout << "4. Capitalize" << endl;
-  cout << "5. Inverse case" << endl;
-  cout << "6. Back" << endl;
-  cout << " - Pick an option: ";
-}
+int read_menu_choice(int max) {
+  int val;
+  if (!(cin >> val)) {
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cout << " - Invalid input, try again." << endl << endl;
+    return -1;
+  }
+  cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-void menu_cipher() {
-  cout << "\t-------------------" << endl;
-  cout << "\t| Method - Cipher |" << endl;
-  cout << "\t-------------------" << endl;
-  cout << "1. Caesar" << endl;
-  cout << "2. ROT13" << endl;
-  cout << "3. ROT_X" << endl;
-  cout << "4. Vigenere" << endl;
-  cout << "5. Back" << endl;
-  cout << " - Pick an option: ";
-}
-
-void menu_encoding() {
-  cout << "\t---------------------" << endl;
-  cout << "\t| Method - Encoding |" << endl;
-  cout << "\t---------------------" << endl;
-  cout << "1. Base32" << endl;
-  cout << "2. Base64" << endl;
-  cout << "3. Ascii85" << endl;
-  cout << "4. Decimal" << endl;
-  cout << "5. Hexadecimal" << endl;
-  cout << "6. Binary" << endl;
-  cout << "7. Octal" << endl;
-  cout << "8. URL" << endl;
-  cout << "9. Back" << endl;
-  cout << " - Pick an option: ";
+  if (val < 1 || val > max) {
+    cout << " - Invalid option, try again." << endl << endl;
+    return -1;
+  }
+  return val;
 }
 
 void menu_encrypt_decrypt(const std::string &banner) {

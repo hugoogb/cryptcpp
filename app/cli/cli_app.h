@@ -2,7 +2,6 @@
 
 #include "cryptcpp/message_store.h"
 #include "cryptcpp/method.h"
-#include <memory>
 #include <string>
 
 namespace cryptcpp::cli {
@@ -12,13 +11,12 @@ public:
   void run();
 
 private:
-  void handle_transform();
-  void handle_cipher();
-  void handle_encoding();
   void show_history();
   void run_method_loop(const std::string &banner,
                        const ICryptMethod &method,
                        const std::string &key_display = "");
+  void run_submenu(const std::string &title,
+                   std::vector<struct MenuItem> &items);
 
   MessageStore store_;
 };

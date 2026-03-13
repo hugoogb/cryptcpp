@@ -28,3 +28,13 @@ TEST_CASE("MessageStore multiple records", "[store]") {
   CHECK(store.size() == 3);
   CHECK(store.records()[2].plain_text == "e");
 }
+
+TEST_CASE("MessageStore clear", "[store]") {
+  MessageStore store;
+  store.add({"a", "b", "ROT13", "13"});
+  store.add({"c", "d", "Base64", ""});
+  CHECK(store.size() == 2);
+  store.clear();
+  CHECK(store.size() == 0);
+  CHECK(store.records().empty());
+}

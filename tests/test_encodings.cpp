@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include <stdexcept>
 #include "cryptcpp/encoding/ascii85.h"
 #include "cryptcpp/encoding/base32.h"
 #include "cryptcpp/encoding/base64.h"
@@ -154,4 +155,37 @@ TEST_CASE("URL roundtrip", "[encoding]") {
   Url u;
   std::string input = "Hello, World! @#$%^&*()";
   CHECK(u.decrypt(u.encrypt(input)) == input);
+}
+
+// --- Invalid input exception tests ---
+
+TEST_CASE("Base64 invalid character throws", "[encoding][error]") {
+  Base64 b;
+  CHECK_THROWS_AS(b.decrypt("!!!"), std::invalid_argument);
+}
+
+TEST_CASE("Base32 invalid character throws", "[encoding][error]") {
+  Base32 b;
+  CHECK_THROWS_AS(b.decrypt("1!!!"), std::invalid_argument);
+}
+
+TEST_CASE("Hexadecimal odd length throws", "[encoding][error]") {
+  Hexadecimal h;
+  CHECK_THROWS_AS(h.decrypt("ABC"), std::invalid_argument);
+}
+
+TEST_CASE("Binary invalid token throws", "[encoding][error]") {
+  Binary b;
+  CHECK_THROWS_AS(b.decrypt("1010"), std::invalid_argument);
+}
+
+TEST_CASE("URL truncated percent throws", "[encoding][error]") {
+  Url u;
+  CHECK_THROWS_AS(u.decrypt("hello%2"), std::invalid_argument);
+}
+
+TEST_CASE("Ascii85 invalid character throws", "[encoding][error]") {
+  Ascii85 a;
+  // Characters outside 33-117 range (excluding delimiters)
+  CHECK_THROWS_AS(a.decrypt("<~\x01~>"), std::invalid_argument);
 }

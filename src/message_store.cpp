@@ -6,6 +6,8 @@ void MessageStore::add(MessageRecord record) {
   records_.push_back(std::move(record));
 }
 
+void MessageStore::clear() { records_.clear(); }
+
 const std::vector<MessageRecord> &MessageStore::records() const {
   return records_;
 }

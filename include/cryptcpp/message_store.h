@@ -15,6 +15,7 @@ struct MessageRecord {
 class MessageStore {
 public:
   void add(MessageRecord record);
+  void clear();
   const std::vector<MessageRecord> &records() const;
   std::size_t size() const;
 
